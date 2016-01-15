@@ -1,0 +1,25 @@
+Topics and Resources, that are covered:
+
+1.) HTTP URLConnection - can be found in Pong.java and Main.java 
+Excerpts: 
+ a) URL PongUrl = new URL("http://www.shockwave-sound.com/sound-effects/explosion-sounds/boom.wav");
+				 AudioClip Pong = Applet.newAudioClip(PongUrl);
+				 Pong.play();
+ b) URL GameOverUrl = new URL("http://www.wav-sounds.com/funny/tara.wav");
+		AudioClip GAMEOVER = Applet.newAudioClip(GameOverUrl);
+		GAMEOVER.play();
+
+ c) URL BackUrl = new URL("http://www.wav-sounds.com/vehicle/jetplanef16.wav");
+	 AudioClip BACK = Applet.newAudioClip(BackUrl);
+	 
+	 
+2.) Threads, Executors, Runnables, Android Handlers - Threads can be found Main.java
+Excerpt:
+ a.) Thread.sleep(10);
+				 
+				 
+				 
+3.) MVC 
+ a.) Can be found on my file tree. The main can be the Model and View, Pong and Racquet are both Controllers 
+
+				 

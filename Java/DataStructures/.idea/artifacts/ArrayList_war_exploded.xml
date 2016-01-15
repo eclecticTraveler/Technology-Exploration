@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ArrayList:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ArrayList_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="CIT 360/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="CIT 360" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
