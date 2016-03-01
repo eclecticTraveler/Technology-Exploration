@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="86b221501c074008ba73347616005e5d" Name="Diagram1">
+        <EntityTypeShape EntityType="WeLearnDBmsModel.Course" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeLearnDBmsModel.Document" Width="1.5" PointX="6.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeLearnDBmsModel.Session" Width="1.5" PointX="3.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeLearnDBmsModel.sysdiagram" Width="1.5" PointX="10.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeLearnDBmsModel.User" Width="1.5" PointX="0.5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeLearnDBmsModel.Workspace" Width="1.5" PointX="0.5" PointY="4.875" IsExpanded="true" />
+        <AssociationConnector Association="WeLearnDBmsModel.Course_courseId" ManuallyRouted="false" />
+        <AssociationConnector Association="WeLearnDBmsModel.FK_Session_Document" ManuallyRouted="false" />
+        <AssociationConnector Association="WeLearnDBmsModel.FK_Session_User" ManuallyRouted="false" />
+        <AssociationConnector Association="WeLearnDBmsModel.User_userId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

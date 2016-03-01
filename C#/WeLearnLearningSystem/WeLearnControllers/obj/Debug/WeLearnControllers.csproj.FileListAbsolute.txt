@@ -1,0 +1,15 @@
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnControllers\bin\Debug\WeLearnControllers.dll
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnControllers\bin\Debug\WeLearnControllers.pdb
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnControllers\obj\Debug\WeLearnControllers.dll
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnControllers\obj\Debug\WeLearnControllers.pdb
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnControllers\obj\Debug\WeLearnControllers.csprojResolveAssemblyReference.cache
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnControllers\bin\Debug\WeLearnLib.dll
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnControllers\bin\Debug\EntityFramework.dll
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnControllers\bin\Debug\WeLearnLib.pdb
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnControllers\bin\Debug\EntityFramework.xml
+C:\Users\rome\Documents\Visual Studio 2013\Projects\AngularTestingAndDemo\WeLearnControllers\bin\Debug\WeLearnControllers.dll.config
+C:\Users\rome\Documents\Visual Studio 2013\Projects\AngularTestingAndDemo\WeLearnControllers\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\rome\Documents\Visual Studio 2013\Projects\AngularTestingAndDemo\WeLearnControllers\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnControllers\bin\Debug\Newtonsoft.Json.dll
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnControllers\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnControllers\bin\Debug\Newtonsoft.Json.xml

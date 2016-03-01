@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WeLearnDBmsStorePrcStoreContainer" CdmEntityContainer="WeLearnDBmsEntitiesSP">
+    <FunctionImportMapping FunctionImportName="spAllUsers" FunctionName="WeLearnDBmsStorePrc.Store.spAllUsers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WeLearnDBmsStorePrc.spAllUsers_Result">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="typeOfUser" ColumnName="typeOfUser" />
+          <ScalarProperty Name="userPicAddress" ColumnName="userPicAddress" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spInsertWeLearnUser" FunctionName="WeLearnDBmsStorePrc.Store.spInsertWeLearnUser" />
+    <FunctionImportMapping FunctionImportName="spIsUserInSystem" FunctionName="WeLearnDBmsStorePrc.Store.spIsUserInSystem">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WeLearnDBmsStorePrc.spIsUserInSystem_Result">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="typeOfUser" ColumnName="typeOfUser" />
+          <ScalarProperty Name="userPicAddress" ColumnName="userPicAddress" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,12 @@
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnLib\bin\Debug\WeLearnLib.dll.config
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnLib\bin\Debug\WeLearnLib.dll
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnLib\bin\Debug\WeLearnLib.pdb
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnLib\bin\Debug\EntityFramework.dll
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnLib\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnLib\bin\Debug\EntityFramework.xml
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnLib\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnLib\obj\Debug\WeLearnLib.dll
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnLib\obj\Debug\WeLearnLib.pdb
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnLib\bin\Debug\Newtonsoft.Json.dll
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnLib\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\WeLearnLib\bin\Debug\Newtonsoft.Json.xml

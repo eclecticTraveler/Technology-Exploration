@@ -1,0 +1,27 @@
+﻿<header class="col-xs-12">
+    <div class="text">Magic The Gathering Browser</div>
+</header>
+<div class="row">
+    <form class="filter col-xs-12 form-inline" role="form" name="filterForm">
+        <div class="form-group">
+            Filter:      <input ng-model="query"      class="form-control" id="inputCard"       placeholder="Enter Card Name">
+            - Max count: <input ng-model="cardsCount" class="form-control" id="inputNumOfCards" type="number"  name="cardsCount" required min="0" max="500">
+        </div>
+        <!-- Only visible when there is wrong input-->
+        <span class="error" ng-show="filterForm.cardsCount.$error.required">
+            Required!
+        </span>
+        <span class="error" ng-show="filterForm.cardsCount.$error.number">
+            Not valid number!
+        </span>
+    </form>
+</div>
+<section class="col-xs-12">
+    <div id="cardsList" class="col-xs-12">
+        <div ng-repeat="card in cards | filterAndReduce:cardsCount:query" class="cardItem img-responsive img-thumbnail">
+            <a href="#/cards/{{card.id}}"><img class="small" ng-src="{{'http://www.urzagatherer.com/cards/' + card.picturePath}}" ng-click="saveQuery()" /></a>
+        </div>
+    </div>
+</section>
+
+

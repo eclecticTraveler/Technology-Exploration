@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D10D6180-C59F-4582-B3C5-D8B09FC8FD6A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WeLearnLib</RootNamespace>
+    <AssemblyName>WeLearnLib</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Desktop\Code Repository Arellano\C#\JSON C#\Json80r1\Bin\Net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BusinessInterfaces\CoursesFacadeRemote.cs" />
+    <Compile Include="BusinessInterfaces\DocumentFacadeRemote.cs" />
+    <Compile Include="BusinessInterfaces\SessionFacadeRemote.cs" />
+    <Compile Include="BusinessInterfaces\UserFacadeRemote.cs" />
+    <Compile Include="BusinessInterfaces\WorkspaceFacadeRemote.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Exceptions\DocumentFacadeException.cs" />
+    <Compile Include="Exceptions\PersonFacadeException.cs" />
+    <Compile Include="LazyObjTransformation\ChatMessagesSerializable.cs" />
+    <Compile Include="LazyObjTransformation\CoursesSerializable.cs" />
+    <Compile Include="LazyObjTransformation\EventsSerializable.cs" />
+    <Compile Include="LazyObjTransformation\UserSerializable.cs" />
+    <Compile Include="LazyObjTransformation\ReshapeProperties.cs" />
+    <Compile Include="ModelToProcedure\WeLearnDBContext.cs" />
+    <Compile Include="Model\Course.cs">
+      <DependentUpon>WeLearnModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Document.cs">
+      <DependentUpon>WeLearnModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\func_GetAllUsers_Result.cs">
+      <DependentUpon>WeLearnModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\fun_GetOrRetriveAllCoursesFromUser_Result.cs">
+      <DependentUpon>WeLearnModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\fun_GetOrRetriveUserDocuments_Result.cs">
+      <DependentUpon>WeLearnModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\fun_GetUserCourses_Result.cs">
+      <DependentUpon>WeLearnModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\fun_IsUserInSystem_Result.cs">
+      <DependentUpon>WeLearnModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Session.cs">
+      <DependentUpon>WeLearnModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\spAllUsers_Result.cs">
+      <DependentUpon>WeLearnModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\spIsUserInSystem_Result.cs">
+      <DependentUpon>WeLearnModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\spRetriveAllCoursesFromUser_Result.cs">
+      <DependentUpon>WeLearnModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\spRetriveUserDocuments_Result.cs">
+      <DependentUpon>WeLearnModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>WeLearnModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_helpdiagrams_Result.cs">
+      <DependentUpon>WeLearnModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sysdiagram.cs">
+      <DependentUpon>WeLearnModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\User.cs">
+      <DependentUpon>WeLearnModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\WeLearnModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WeLearnModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\WeLearnModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WeLearnModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\WeLearnModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WeLearnModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Workspace.cs">
+      <DependentUpon>WeLearnModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="Model\WeLearnModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WeLearnModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\WeLearnModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WeLearnModel.edmx</DependentUpon>
+      <LastGenOutput>WeLearnModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Model\WeLearnModel.edmx.diagram">
+      <DependentUpon>WeLearnModel.edmx</DependentUpon>
+    </None>
+    <None Include="Model\WeLearnModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WeLearnModel.edmx</DependentUpon>
+      <LastGenOutput>WeLearnModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

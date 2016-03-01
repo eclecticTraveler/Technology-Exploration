@@ -1,0 +1,385 @@
+﻿<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="../Scripts/JavaScript1.js"></script>
+<script src="../Scripts/stringService.js"></script>
+<style type="text/css">
+    table,
+    th,
+    td {
+        border: 1px solid grey;
+        border-collapse: collapse;
+        padding: 5px;
+        cursor: pointer;
+    }
+
+        table tr:nth-child(odd) {
+            background-color: #f1f1f1;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+
+    .arrow-up,
+    .arrow-down {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        display: inline-block;
+    }
+
+    .arrow-up {
+        border-bottom: 10px solid black;
+    }
+
+    .arrow-down {
+        border-top: 10px solid black;
+    }
+</style>
+
+<body ng-app="mainModule">
+    <div ng-controller="firstCntlr">
+        <h1>First Controller</h1>
+        <h4>{{message}}</h4>
+        <h4>{{employee.firstName}}</h4>
+        <h4>{{employee.lastName}}</h4>
+        <h4>{{employee.gender}}</h4>
+    </div>
+    <div ng-controller="secondCntlr">
+        <h1>Second Controller</h1>
+        <!-- Angular will create this model explicitly since we don't have it
+            its ok because we are not storing anything. Also the filtering reponds
+            to the same name of the ng-model-->
+        <input type="text" ng-model="filteringNames">
+        <ul>
+            <li ng-repeat="person in people | filter:filteringNames | orderBy:'country'">
+                {{ (person.name | uppercase) + ', ' + person.country }}
+            </li>
+        </ul>
+    </div>
+    </div>
+    <div ng-controller="thirdCntlr">
+        <h1>Third Controller</h1>
+        <input type="text" ng-model="filteringInTable">
+        <table>
+            <tr ng-repeat="name in names | filter:filteringInTable  | orderBy : 'Country' ">
+                <td>{{name.Name}}</td>
+                <td>{{name.Country}}</td>
+            </tr>
+        </table>
+    </div>
+    <div ng-controller="fifthCntlr">
+        <h1>Fifth Controller</h1>
+        <button ng-click="toggle()">Hide</button>
+        <h4 ng-hide="myVariable">
+            Noam Chomsky <br>
+            Michele Foucalt <br>
+            Simone de Behavior
+        </h4>
+    </div>
+    <div ng-controller="sixthCntlr">
+        <h1>Sixth Controller</h1>
+        <button ng-click="toggle()">Show</button>
+        <div ng-hide="showIt">
+            <table>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                </tr>
+                <tr>
+                    <td>Peter</td>
+                    <td>Griffin</td>
+                </tr>
+                <tr>
+                    <td>Lois</td>
+                    <td>Griffin</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div ng-controller="seventhCntlr">
+        <h1>Seventh Controller</h1>
+        <p>Nesting ng-repeat</p>
+        <br>
+        <ul>
+            <li ng-repeat="country in countries">
+                {{country.name}}
+                <ul>
+                    <li ng-repeat="city in country.cities">
+                        {{city.name}}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <br>
+        <ul>
+            <li ng-repeat="country in countries">
+                {{country.name}} - Index = {{$index}}
+                <ul>
+                    <li ng-repeat="city in country.cities">
+                        {{city.name}} - Index = {{$index}}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <br>
+        <ul>
+            <li ng-repeat="country in countries">
+                {{country.name}} - Index = {{$index}}
+                <ul>
+                    <li ng-repeat="city in country.cities">
+                        {{city.name}} - Parent Index = {{$parent.$index}}, Index = {{$index}}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <br>
+        <ul>
+            <li ng-repeat="country in countries" ng-init="parentIndex=$index">
+                {{country.name}} - Index = {{$index}}
+                <ul>
+                    <li ng-repeat="city in country.cities">
+                        {{city.name}} - Parent Index = {{parentIndex}}, Index = {{$index}}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div ng-controller="eightCntlr">
+        <h1>Eighth Controller</h1>
+        <h2>Handling Events</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Likes</th>
+                    <th>Dislikes</th>
+                    <th>Like/Dislike</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="technology in technologies">
+                    <td>{{technology.name}}</td>
+                    <td>{{technology.likes}}</td>
+                    <td>{{technology.dislikes}}</td>
+                    <td>
+                        <!-- calling the function in the controller and passing the technology object -->
+                        <input type="button" value="Like" ng-click="incrementLikes(technology)">
+                        <input type="button" value="Dislike" ng-click="incrementDislikes(technology)">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-controller="ninthCntlr">
+        <h1>Ninth Controller</h1>
+        <h2>Filters</h2>
+        <h3>Filter with dynamic number of rows shown</h3> Rows to display:
+        <input type="number" step="1" min="0" max="5" ng-model="rowLimit">
+        <br>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date Of Birth</th>
+                    <th>Gender</th>
+                    <th>Salary (number)</th>
+                    <th>Salary (currency)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="employee in employees | limitTo:rowLimit">
+                    <td>{{employee.name | uppercase}}</td>
+                    <td>{{employee.dateOfBirth | date:"dd/MM/yyyy"}}</td>
+                    <td>{{employee.gender | lowercase}}</td>
+                    <td>{{employee.salary | number:2}}</td>
+                    <td>{{employee.salary | currency : 1}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-controller="tenthCntlr">
+        <h1>Tenth Controller</h1>
+        <h2>Filters ASCENDING and DESCNDING</h2>
+        <h3>Filter with + &amp; -</h3> Sort by
+        <select ng-model="sortColumn">
+            <option value="name">Name ASC</option>
+            <option value="gender">Gender ASC</option>
+            <option value="dateOfBirth">Date of Birth ASC</option>
+            <option value="-salary">Salary DESC</option>
+        </select>
+        <br>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date Of Birth</th>
+                    <th>Gender</th>
+                    <th>Salary (number)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- orderBy: 'name':true   OR  orderBy: '-name'-->
+                <tr ng-repeat="employee in employees | orderBy: sortColumn">
+                    <td>{{employee.name | uppercase}}</td>
+                    <td>{{employee.dateOfBirth | date:"dd/MM/yyyy"}}</td>
+                    <td>{{employee.gender | lowercase}}</td>
+                    <td>{{employee.salary | number:2}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-controller="eleventhCntlr">
+        <h1>Eleventh Controller</h1>
+        <h2>Biodirectional Filters </h2>
+        <br>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <th ng-click="sortData('name')">
+                        Name
+                        <div ng-class="getSortClass('name')">
+                    </th>
+                    <th ng-click="sortData('dateOfBirth')">
+                        Date Of Birth
+                        <div ng-class="getSortClass('dateOfBirth')">
+                    </th>
+                    <th ng-click="sortData('gender')">
+                        Gender
+                        <div ng-class="getSortClass('gender')">
+                    </th>
+                    <th ng-click="sortData('salary')">
+                        Salary (number)
+                        <div ng-class="getSortClass('salary')">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- orderBy: 'name':true   OR  orderBy: '-name'-->
+                <tr ng-repeat="employee in employees | orderBy: sortColumn:reverseSort">
+                    <td>{{employee.name | uppercase}}</td>
+                    <td>{{employee.dateOfBirth | date:"dd/MM/yyyy"}}</td>
+                    <td>{{employee.gender | lowercase}}</td>
+                    <td>{{employee.salary | number:2}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-controller="twelveCntlr">
+        <h1>Twelve Controller</h1>
+        <h2>Filtering only on the specified column "Country"</h2>
+        <input type="text" ng-model="filteringInTable.Country">
+        <table>
+            <tr ng-repeat="name in names | filter:filteringInTable  | orderBy : 'Country' ">
+                <td>{{name.Name}}</td>
+                <td>{{name.Country}}</td>
+            </tr>
+        </table>
+    </div>
+    <div ng-controller="thirdteenthCntlr">
+        <h1>Thirdteen Controller</h1>
+        <h2>Filtering by multiple properties</h2>
+        <input type="text" ng-model="filteringInTable.name" placeholder="search name">
+        <input type="text" ng-model="filteringInTable.country" placeholder="search city">
+        <input type="checkbox" ng-model="exactMatch"> Exact Match
+        <br>
+        <br>
+        <table>
+            <tr ng-repeat="employee in employees | filter:filteringInTable:exactMatch">
+                <td>{{employee.name}}</td>
+                <td>{{employee.dateOfBirth | date:"dd/MM/yyyy"}}</td>
+                <td>{{employee.gender}}</td>
+                <td>{{employee.country}}</td>
+            </tr>
+        </table>
+        <h3>Search with expressions on Columns City and Name</h3>
+        <input type="text" ng-model="searchText" placeholder="search city &amp; name">
+        <br>
+        <br>
+        <table>
+            <tr ng-repeat="employee in employees | filter:search">
+                <td>{{employee.name}}</td>
+                <td>{{employee.dateOfBirth | date:"dd/MM/yyyy"}}</td>
+                <td>{{employee.gender}}</td>
+                <td>{{employee.country}}</td>
+            </tr>
+        </table>
+    </div>
+    <div ng-controller="fourteenthCntlr">
+        <h1>Fourthteenth Controller</h1>
+        <h3>Custom Filter</h3>
+        <input type="text" ng-model="searchText" placeholder="search city &amp; name">
+        <br>
+        <br>
+        <table>
+            <tr ng-repeat="employee in employees | filter:search">
+                <td>{{employee.name}}</td>
+                <td>{{employee.gender | gender}}</td>
+                <td>{{employee.country}}</td>
+            </tr>
+        </table>
+    </div>
+
+
+
+    <br />
+    <br/>
+
+    <div ng-controller="fiveteenthCntlr">
+        <h1>Fifthteenth Controller</h1>
+        <h2>Information retrived from my own servlet coming from my own database</h2>
+        {{error}}
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="employee in employees">
+                    <td>{{employee.id}}</td>
+                    <td>{{employee.name}}</td>
+                    <td>{{employee.gender}}</td>
+                    <td>{{employee.salary}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-controller="sixteenthCntlr">
+        <h1>Sixteenth Controller</h1>
+        <h2>Custom service in AngularJS</h2>
+
+        <table>
+            <tr>
+                <th>Your String</th>
+                <th><input type="text" ng-model="userInput" /></th>
+            </tr>
+            <tr>
+                <td>Result</td>
+                <td><input type="text" ng-model="sysOutput" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="button" value="Process String" ng-click="transformString(userInput)" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div ng-controller="seventhCntlr">
+        <h1>Seventeenth Controller</h1>
+        <h2>Dependency injection subject to minification</h2>
+
+        <p>{{newMessage}}</p>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,208 @@
+﻿
+
+        <!-- * *******************************************************
+        *
+        *    ________          __  ____
+        *   / ____/ /_  ____ _/ /_/ __ \____  ____  ____ ___
+        *  / /   / __ \/ __ `/ __/ /_/ / __ \/ __ \/ __ `__ \
+        * / /___/ / / / /_/ / /_/ _, _/ /_/ / /_/ / / / / / /
+        * \____/_/ /_/\__,_/\__/_/ |_|\____/\____/_/ /_/ /_/
+        * 
+        *********************************************************-->
+
+
+                <!-- *****************************************************************
+                     __  __                  ________          __     __    _      __
+                    / / / /_______  _____   / ____/ /_  ____ _/ /_   / /   (_)____/ /_
+                   / / / / ___/ _ \/ ___/  / /   / __ \/ __ `/ __/  / /   / / ___/ __/
+                  / /_/ (__  )  __/ /     / /___/ / / / /_/ / /_   / /___/ (__  ) /_
+                  \____/____/\___/_/      \____/_/ /_/\__,_/\__/  /_____/_/____/\__/
+
+                  **********************************************************************-->
+                <!-- Small Menu Version -->
+                <div id="chatUpperBar" class="content-fluid">
+                    <div id="row">
+                        <div id="chatUpperBar"  class="upperChatNavigation col-md-12">
+
+                            <ul class="nav navbar-nav smallMenu moreUsers">
+                                <li class="dropdown moreUsers">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-comment"></i> Other Users <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li class="contact col-md-4">
+                                            <div class="inner-addon right-addon">
+                                                <input id="searchUserInput" type="text" class="form-control inner-addon right-addon" placeholder="Search" ng-model="chatUserSearch">
+                                                <i class="glyphicon glyphicon-search"></i>
+                                            </div>
+                                        </li>
+
+                                        <li class="contact col-md-4" ng-repeat="user in chatUsers | filter:chatUserSearch | orderBy:'firstName'">
+                                            <div class="contact col-md-4" ng-click="chatWithThisPerson(user.personId)">
+                                                <img ng-src={{user.picture}} alt="User" class="contactphoto setPicSize" />
+                                                <span class="contactName">{{user.firstName + " " + user.lastName}} </span>
+                                                <span class="contactStatus"></span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-fluid">
+                    <!-- Big Version -->
+                    <div id="userChatListBig" class="sidebar-content active">
+                   
+                        <div ng-repeat="user in chatUsers | filter:chatUserSearch">
+                            <div class="contact col-md-4" ng-click="chatWithThisPerson(user.personId)">
+                                <img ng-src={{user.picture}} alt="User" class="contactphoto setPicSize"/>
+                                <span class="contactName">{{user.firstName + " " + user.lastName}} </span>
+                                <span class="contactStatus"></span>
+                            </div>
+                        </div>
+                        <!-- Search Bar -->
+                        <div id="searchUserBox" class="inner-addon right-addon" style="z-index:300">
+                            <input id="searchUserInput" type="text" class="form-control inner-addon right-addon" placeholder="Search" ng-model="chatUserSearch">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </div>
+                    </div>
+                    <!--**********************************************
+                           ________          __     ____
+                          / ____/ /_  ____ _/ /_   / __ )____  _  __
+                         / /   / __ \/ __ `/ __/  / __  / __ \| |/_/
+                        / /___/ / / / /_/ / /_   / /_/ / /_/ /><
+                        \____/_/ /_/\__,_/\__/  /_____/\____/_/|_|
+
+                      **************************************************-->
+                    <div class="row">
+                        <div id="chatBoxWrapper" class="chat col-md-12">
+                            <!-- Little inner Chat Box Menu -->
+                            <!-- Not displayable until user selects who to chat with (extracted pull-left class) -->
+                            <div id="innerChatBoxWrapper" ng-show="innerChatBox">
+                                <div class="btn-group">
+                                    <button type="button" id="chatMenu" class="glyphicon glyphicon-menu-hamburger btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                        <b class="caret"></b>
+                                    </button>
+                                    <ul class="dropdown-menu slidedown">
+                                        <li>
+                                            <a href="">
+                                                <span class="glyphicon glyphicon-plus">
+                                                </span> Add User
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <span class="glyphicon glyphicon-facetime-video">
+                                                </span> Video Call
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <span class="glyphicon glyphicon-earphone">
+                                                </span> Audio Call
+                                            </a>
+                                        </li>
+
+                                        <li class="divider"></li>
+
+
+                                        <li>
+                                            <a href="">
+                                                <span class="glyphicon glyphicon-edit">
+                                                </span> Edit
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <span class="glyphicon glyphicon-trash">
+                                                </span> Remove
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <span class="glyphicon glyphicon-question-sign"></span>
+                                                FAQ
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Right Side Header -->
+                                <span class="chat__status">status</span>
+                                <div class="chat__person">
+                                    <span class="chat__online active"></span>
+                                    <span class="chat__name">{{personChattingWith}}</span>
+                                </div>
+
+                                <hr class="chatBoxHeader">
+
+                                <!-- Start of Chat Messeages     chat-message-list="chatMsn"-->
+                                <div id="chatBox" class="chat__messages" scroll="chatMsn">
+                                    <!-- Begin -->
+
+                                    <div class="divideConversation"></div>
+
+                                    <div>
+
+                                        <p class="text-center text-muted small">November 2, 2015 at 11:23 AM</p>
+
+                                    </div>
+
+                                    <!-- Sender -->
+                                    <div ng-repeat="chatMessage in chatMsn">
+                                        <div ng-if="chatMessage.Sender == 'Noam Chomsky'">
+                                            <div class="chat__msgRow">
+                                                <span class="chat-img pull-right">
+                                                    <img src="https://goo.gl/iF6m7A" alt="Me" class="img-circle" />
+                                                </span>
+                                                <div class="chat-body clearfix">
+                                                    <div class="header">
+                                                        <small class="setTimeLeft text-muted">
+                                                            <span class="glyphicon glyphicon-time"></span>{{chatMessage.Date + " " + chatMessage.Time}}
+                                                        </small>
+                                                        <strong class=" pull-right primary-font">{{chatMessage.Sender}}</strong>
+                                                    </div>
+                                                    <p class="chat__message mine">{{chatMessage.Message}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <!-- Receiver -->
+                                        <div ng-if="chatMessage.Sender != 'Noam Chomsky'">
+                                            <div class="chat__msgRow">
+                                                <span class="chat-img pull-left">
+                                                    <img src="https://goo.gl/hQqw1y" alt="You" class="img-circle" />
+                                                </span>
+                                                <div class="chat-body clearfix">
+                                                    <div class="Header">
+                                                        <strong class="primary-font leftNameIndent">{{chatMessage.Sender}}</strong> <small class="pull-right text-muted">
+                                                            <span class="glyphicon glyphicon-time"></span>{{chatMessage.Date + " " + chatMessage.Time}}
+
+                                                        </small>
+                                                    </div>
+                                                    <p class="chat__message notMine">{{chatMessage.Message}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="divideConversation"></div>
+
+                                    <!-- End of Chat -->
+                                </div>
+                            </div>
+                            <!-- End of Chat box -->
+                            <!-- Input for chat box -->
+                            <div id="chatInputWrapper" class="inner-addon left-addon ">
+                                <i class="glyphicon glyphicon-camera camPointer"></i>
+                                <input type="text" class="form-control chat__input" placeholder="Your message" ng-model="chatInput" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+          
+

@@ -1,0 +1,155 @@
+﻿<!--
+Alberto Arellano 10/15/2015 12:05 am
+ ___ __ __   ________    ________  ___   __
+/__//_//_/\ /_______/\  /_______/\/__/\ /__/\
+\::\| \| \ \\::: _  \ \ \__.::._\/\::\_\\  \ \
+ \:.      \ \\::(_)  \ \   \::\ \  \:. `-\  \ \
+  \:.\-/\  \ \\:: __  \ \  _\::\ \__\:. _    \ \
+   \. \  \  \ \\:.\ \  \ \/__\::\__/\\. \`-\  \ \
+    \__\/ \__\/ \__\/\__\/\________\/ \__\/ \__\/
+
+        ___ __ __   ______   ___   __    __  __
+       /__//_//_/\ /_____/\ /__/\ /__/\ /_/\/_/\
+       \::\| \| \ \\::::_\/_\::\_\\  \ \\:\ \:\ \
+        \:.      \ \\:\/___/\\:. `-\  \ \\:\ \:\ \
+         \:.\-/\  \ \\::___\/_\:. _    \ \\:\ \:\ \
+          \. \  \  \ \\:\____/\\. \`-\  \ \\:\_\:\ \
+           \__\/ \__\/ \_____\/ \__\/ \__\/ \_____\/
+
+
+         <div class="container-fluid">
+
+           <div class="row">
+
+<!-- *******************************************************
+    ______                 __
+   / ____/   _____  ____  / /______
+  / __/ | | / / _ \/ __ \/ __/ ___/
+ / /___ | |/ /  __/ / / / /_(__  )
+/_____/ |___/\___/_/ /_/\__/____/
+
+**********************************************************-->
+<div>
+    <div class="accordionPos col-md-4">
+        <div class="panel-group" id="eventsAccord">
+            <div class="panel panel-default">
+                <div class="panel-heading accordionSet" data-toggle="collapse" data-parent="#eventsAccord" href="#collapseOne">
+
+                    <h4 class="panel-title accordionTitle">
+                        <i class="glyphicon glyphicon-menu-hamburger menuPos"></i> <b class="caret menuPos"></b>
+                        <a class="accordion-toggle centerTitle" data-toggle="collapse" data-parent="#eventsAccord" href="#collapseOne">
+                            Events
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div id="eventDayheader" class="dayHeaderStyle"><span class="dayheaderTitle">Today</span></div>
+                        <hr />
+
+                        <div id="singleEvent" class="singleEventStyle" ng-repeat="event in events">
+                            <span id="eventTitle"> {{event.Desc}}</span><br /><span id="whenIsDue">{{event.docText.Due}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- *******************************************************
+       ______
+      / ____/___  __  _______________  _____
+     / /   / __ \/ / / / ___/ ___/ _ \/ ___/
+    / /___/ /_/ / /_/ / /  (__  )  __(__  )
+    \____/\____/\__,_/_/  /____/\___/____/
+
+    **********************************************************-->
+    <div class="accordionPos col-md-4">
+        <div class="panel-group" id="coursesAccord">
+            <div class="panel panel-default">
+                <div class="panel-heading accordionSet" data-toggle="collapse" data-parent="#coursesAccord" href="#collapseTwo">
+                    <h4 class="panel-title accordionTitle">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#coursesAccord" href="#collapseTwo">
+                            Courses
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div id="singleCourse" class="singleCourseStyle" ng-repeat="course in courses">
+                            <span id="courseTitle"><i> {{course.courseName}} </i></span> <span id="grade">{{course.courseCode}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- *******************************************************
+       ______               __     ____              __
+      / ____/________ _____/ /__  / __ )____  ____  / /__
+     / / __/ ___/ __ `/ __  / _ \/ __  / __ \/ __ \/ //_/
+    / /_/ / /  / /_/ / /_/ /  __/ /_/ / /_/ / /_/ / ,<
+    \____/_/   \__,_/\__,_/\___/_____/\____/\____/_/|_|
+
+    **********************************************************-->
+    <div class="accordionPos  col-md-4">
+        <div class="panel-group" id="gradesAccord">
+            <div class="panel panel-default">
+                <div class="panel-heading accordionSet" data-toggle="collapse" data-parent="#gradesAccord" href="#collapseThree">
+                    <h4 class="panel-title accordionTitle">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#gradesAccord" ng-click="grades()">
+                            Gradebook
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div id="singleGradedAssign" class="singleGradedAssigntStyle">
+                            <span id="courseTitle"><i> MATH 108</i></span><span id="eventTitle">ADDITION AND SUBTRACTION</span> <span id="grade">100%</span>
+                        </div>
+
+                        <div id="singleGradedAssign" class="singleGradedAssigntStyle">
+                            <span id="courseTitle"><i> MATH 108</i></span><span id="eventTitle">ADDITION AND SUBTRACTION</span> <span id="grade">100%</span>
+                        </div>
+
+                        <div id="singleGradedAssign" class="singleGradedAssigntStyle">
+                            <span id="courseTitle"><i> MATH 108</i></span><span id="eventTitle">ADDITION AND SUBTRACTION</span> <span id="grade">100%</span>
+                        </div>
+
+                        <div id="singleGradedAssign" class="singleGradedAssigntStyle">
+                            <span id="courseTitle"><i> MATH 108</i></span><span id="eventTitle">ADDITION AND SUBTRACTION</span> <span id="grade">100%</span>
+                        </div>
+
+                        <div id="singleGradedAssign" class="singleGradedAssigntStyle">
+                            <span id="courseTitle"><i> MATH 108</i></span><span id="eventTitle">ADDITION AND SUBTRACTION</span> <span id="grade">100%</span>
+                        </div>
+
+                        <div id="singleGradedAssign" class="singleGradedAssigntStyle">
+                            <span id="courseTitle"><i> MATH 108</i></span><span id="eventTitle">ADDITION AND SUBTRACTION</span> <span id="grade">100%</span>
+                        </div>
+
+                        <div id="singleGradedAssign" class="singleGradedAssigntStyle">
+                            <span id="courseTitle"><i> MATH 108</i></span><span id="eventTitle">ADDITION AND SUBTRACTION</span> <span id="grade">100%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- * ******************************
+    *
+    *    ________          __
+    *   / ____/ /_  ____ _/ /_
+    *  / /   / __ \/ __ `/ __/
+    * / /___/ / / / /_/ / /_
+    * \____/_/ /_/\__,_/\__/
+    *
+    ***************************************-->
+    <div id="chatTab" class="col-md-4 chatTabstyle" ng-click="chatRoom();" ng-show="chatBoxVisibility">
+        Chat
+    </div>
+</div>

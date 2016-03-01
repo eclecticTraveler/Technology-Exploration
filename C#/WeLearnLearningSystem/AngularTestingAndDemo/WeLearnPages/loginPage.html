@@ -1,0 +1,97 @@
+﻿<!--
+Alberto Arellano 2/3/2016 1:15 am
+ __       ______   _______             ________  ___   __
+/_/\     /_____/\ /______/\           /_______/\/__/\ /__/\
+\:\ \    \:::_ \ \\::::__\/__  _______\__.::._\/\::\_\\  \ \
+ \:\ \    \:\ \ \ \\:\ /____/\/______/\  \::\ \  \:. `-\  \ \
+  \:\ \____\:\ \ \ \\:\\_  _\/\__::::\/  _\::\ \__\:. _    \ \
+   \:\/___/\\:\_\ \ \\:\_\ \ \          /__\::\__/\\. \`-\  \ \
+    \_____\/ \_____\/ \_____\/          \________\/ \__\/ \__\/
+
+                ______   ________   _______    ______
+               /_____/\ /_______/\ /______/\  /_____/\
+               \:::_ \ \\::: _  \ \\::::__\/__\::::_\/_
+                \:(_) \ \\::(_)  \ \\:\ /____/\\:\/___/\
+                 \: ___\/ \:: __  \ \\:\\_  _\/ \::___\/_
+                  \ \ \    \:.\ \  \ \\:\_\ \ \  \:\____/\
+                   \_\/     \__\/\__\/ \_____\/   \_____\/
+
+                    Lets Make WeLearn Happen!!!
+-->
+
+<!--
+                __                _          ____
+               / /   ____  ____ _(_)___     / __ )____  _  __
+              / /   / __ \/ __ `/ / __ \   / __  / __ \| |/_/
+             / /___/ /_/ / /_/ / / / / /  / /_/ / /_/ />  <
+            /_____/\____/\__, /_/_/ /_/  /_____/\____/_/|_|
+                        /____/
+-->
+<div class="row" id="main">
+    <span class="welcomeMessage">Welcome</span>
+    <div>
+        <form class="formLogIn" ng-submit="processForm()">
+            <div class="main">
+
+                <!--   ___                _
+                      |_ _|_ _  _ __ _  _| |_ ___
+                       | || ' \| '_ \ || |  _(_-<
+                      |___|_||_| .__/\_,_|\__/__/
+                               |_|
+                -->
+                <label>Username</label>
+
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-user"></i>
+                    </span>
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Username"
+                           autofocus
+                           tabindex=1
+                           ng-model="formData.username" ng-focus="showErr=false">
+                </div>
+
+                <label>Password<a href=""></a></label>
+
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-lock"></i>
+                    </span>
+                    <input type="password"
+                           class="form-control"
+                           placeholder="Password"
+                           tabindex=2
+                           ng-model="formData.password" ng-focus="showErr=false">
+                </div>
+                <!--        _              _        ___ _
+                           | |   ___  __ _(_)_ _   | _ ) |_ _ _
+                           | |__/ _ \/ _` | | ' \  | _ \  _| ' \
+                           |____\___/\__, |_|_||_| |___/\__|_||_|
+                                     |___/                        -->
+                <div class="row">
+                    <div class="btnPosition">
+                        <button type="submit"
+                                class="btn btn-large
+                                btnStyle "
+                                tabindex=3
+                                ng-click="login()">
+                            <span class="btnText">
+                                Login
+                            </span>
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="error_message" ng-show="showErr">
+                    <span class="col-md-12 alert alert-warning">{{ errorMsg }}</span>
+                </div>
+            </div>
+
+
+
+        </form>
+    </div>
+</div>

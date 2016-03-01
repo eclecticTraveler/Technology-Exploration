@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6C976225-61CE-4906-8D9E-7CE9BDDC24FD}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AngularTestingAndDemo</RootNamespace>
+    <AssemblyName>AngularTestingAndDemo</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Desktop\Code Repository Arellano\C#\JSON C#\Json80r1\Bin\Net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc.Extensions, Version=1.0.9.0, Culture=neutral, PublicKeyToken=17e35335fc9f8fc8, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Web.Mvc.Extensions.Mvc.4.1.0.9\lib\net40\System.Web.Mvc.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="index.html" />
+    <Content Include="MagicAngularTutorial\MagicScripts\arrow.png" />
+    <Content Include="MagicAngularTutorial\MagicScripts\menu.png" />
+    <Content Include="MagicAngularTutorial\MagicViews\detail.html" />
+    <Content Include="MagicAngularTutorial\MagicViews\list.html" />
+    <Content Include="MagicAngularTutorial\MagicScripts\oldAll.json" />
+    <Content Include="MagicAngularTutorial\MagicScripts\formattedAll.json" />
+    <Content Include="MagicAngularTutorial\MagicScripts\all.json" />
+    <Content Include="MagicAngularTutorial\MagicScripts\small.json" />
+    <Content Include="Scripts\old.js" />
+    <Content Include="Scripts\weLearnControllers.js" />
+    <Content Include="Scripts\WeLearnDirectives.js" />
+    <Content Include="Scripts\weLearnServices.js" />
+    <Content Include="WeLearnGlobal.asax" />
+    <Content Include="WeLearnPages\addUser.html" />
+    <Content Include="WeLearnPages\loginPage.html" />
+    <Content Include="WeLearnPages\mainMenu.html" />
+    <Content Include="Unnecessary\OldHandlers\MainPortalHandler.ashx" />
+    <Content Include="Unnecessary\OldHandlers\ChatHandler.ashx" />
+    <Content Include="Handlers\MainHandler.ashx" />
+    <Content Include="packages.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Unnecessary\OldHandlers\ChatHandlerManyFunctions.asmx" />
+    <Content Include="LearningExamples\EmployeeHandler.asmx" />
+    <Content Include="MagicAngularTutorial\index.html" />
+    <Content Include="MagicAngularTutorial\MagicScripts\app.js" />
+    <Content Include="MagicAngularTutorial\MagicScripts\cardControllers.js" />
+    <Content Include="MagicAngularTutorial\MagicScripts\localService.js" />
+    <Content Include="MagicAngularTutorial\MagicScripts\magicIndex.css" />
+    <Content Include="Pics\Foucault.jpg" />
+    <Content Include="Pics\goldman.jpg" />
+    <Content Include="Pics\Martin_Heidegger.jpg" />
+    <Content Include="Pics\noam.jpg" />
+    <Content Include="Styles\chatAft.css" />
+    <Content Include="Scripts\chatAnJS.js" />
+    <Content Include="Styles\chatStyle.css" />
+    <Content Include="LearningExamples\JavaScript1.js" />
+    <Content Include="Styles\main.css" />
+    <Content Include="Scripts\main.js" />
+    <Content Include="LearningExamples\stringService.js" />
+    <Content Include="LearningExamples\AngularDemos.html" />
+    <Content Include="Styles\chatAddition.css" />
+    <Content Include="Styles\weLearn.css" />
+    <Content Include="WeLearnPages\chatRoom.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationControllers\ApplicationController.cs" />
+    <Compile Include="ApplicationControllers\CalendarHandler.cs" />
+    <Compile Include="ApplicationControllers\ChatMessagesHandler.cs" />
+    <Compile Include="ApplicationControllers\LoginPortalHandler.cs" />
+    <Compile Include="ApplicationControllers\ChatUsersHandler.cs" />
+    <Compile Include="ApplicationControllers\WeLearnHandlerInterface.cs" />
+    <Compile Include="Unnecessary\OldHandlers\ChatHandler.ashx.cs">
+      <DependentUpon>ChatHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Unnecessary\OldHandlers\ChatHandlerManyFunctions.asmx.cs">
+      <DependentUpon>ChatHandlerManyFunctions.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LearningExamples\Employee.cs" />
+    <Compile Include="Unnecessary\OldHandlers\MainPortalHandler.ashx.cs">
+      <DependentUpon>MainPortalHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\MainHandler.ashx.cs">
+      <DependentUpon>MainHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Unnecessary\OldHandlers\PortalHandler.cs" />
+    <Compile Include="LearningExamples\EmployeeHandler.asmx.cs">
+      <DependentUpon>EmployeeHandler.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WeLearnGlobal.asax.cs">
+      <DependentUpon>WeLearnGlobal.asax</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WeLearnControllers\WeLearnControllers.csproj">
+      <Project>{96e00a09-a4cc-49d3-b4a7-7de8464bbcdb}</Project>
+      <Name>WeLearnControllers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WeLearnLib\WeLearnLib.csproj">
+      <Project>{d10d6180-c59f-4582-b3c5-d8b09fc8fd6a}</Project>
+      <Name>WeLearnLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>22947</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:22947/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

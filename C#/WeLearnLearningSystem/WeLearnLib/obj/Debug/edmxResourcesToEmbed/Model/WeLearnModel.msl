@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WeLearnDBmsModelStoreContainer" CdmEntityContainer="WeLearnDBmsEntities">
+    <EntitySetMapping Name="Courses">
+      <EntityTypeMapping TypeName="WeLearnDBmsModel.Course">
+        <MappingFragment StoreEntitySet="Course">
+          <ScalarProperty Name="courseID" ColumnName="courseID" />
+          <ScalarProperty Name="courseName" ColumnName="courseName" />
+          <ScalarProperty Name="courseCode" ColumnName="courseCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Documents">
+      <EntityTypeMapping TypeName="WeLearnDBmsModel.Document">
+        <MappingFragment StoreEntitySet="Document">
+          <ScalarProperty Name="docId" ColumnName="docId" />
+          <ScalarProperty Name="docUUID" ColumnName="docUUID" />
+          <ScalarProperty Name="docType" ColumnName="docType" />
+          <ScalarProperty Name="docContext" ColumnName="docContext" />
+          <ScalarProperty Name="docText" ColumnName="docText" />
+          <ScalarProperty Name="docVersion" ColumnName="docVersion" />
+          <ScalarProperty Name="docDate" ColumnName="docDate" />
+          <ScalarProperty Name="docTime" ColumnName="docTime" />
+          <ScalarProperty Name="docDesc" ColumnName="docDesc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sessions">
+      <EntityTypeMapping TypeName="WeLearnDBmsModel.Session">
+        <MappingFragment StoreEntitySet="Session">
+          <ScalarProperty Name="sessionId" ColumnName="sessionId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="documentId" ColumnName="documentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="WeLearnDBmsModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="WeLearnDBmsModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="typeOfUser" ColumnName="typeOfUser" />
+          <ScalarProperty Name="userPicAddress" ColumnName="userPicAddress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Workspaces">
+      <EntityTypeMapping TypeName="WeLearnDBmsModel.Workspace">
+        <MappingFragment StoreEntitySet="Workspace">
+          <ScalarProperty Name="workspaceId" ColumnName="workspaceId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="courseId" ColumnName="courseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="WeLearnDBmsModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="WeLearnDBmsModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="WeLearnDBmsModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="WeLearnDBmsModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WeLearnDBmsModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="WeLearnDBmsModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WeLearnDBmsModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="WeLearnDBmsModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="WeLearnDBmsModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="spAllUsers" FunctionName="WeLearnDBmsModel.Store.spAllUsers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WeLearnDBmsModel.spAllUsers_Result">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="typeOfUser" ColumnName="typeOfUser" />
+          <ScalarProperty Name="userPicAddress" ColumnName="userPicAddress" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spInsertWeLearnUser" FunctionName="WeLearnDBmsModel.Store.spInsertWeLearnUser" />
+    <FunctionImportMapping FunctionImportName="spIsUserInSystem" FunctionName="WeLearnDBmsModel.Store.spIsUserInSystem">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WeLearnDBmsModel.spIsUserInSystem_Result">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="typeOfUser" ColumnName="typeOfUser" />
+          <ScalarProperty Name="userPicAddress" ColumnName="userPicAddress" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="func_GetAllUsers" FunctionName="WeLearnDBmsModel.Store.spAllUsers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WeLearnDBmsModel.func_GetAllUsers_Result">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="typeOfUser" ColumnName="typeOfUser" />
+          <ScalarProperty Name="userPicAddress" ColumnName="userPicAddress" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="fun_IsUserInSystem" FunctionName="WeLearnDBmsModel.Store.spIsUserInSystem">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WeLearnDBmsModel.fun_IsUserInSystem_Result">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="typeOfUser" ColumnName="typeOfUser" />
+          <ScalarProperty Name="userPicAddress" ColumnName="userPicAddress" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spRetriveAllCoursesFromUser" FunctionName="WeLearnDBmsModel.Store.spRetriveAllCoursesFromUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WeLearnDBmsModel.spRetriveAllCoursesFromUser_Result">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="courseName" ColumnName="courseName" />
+          <ScalarProperty Name="courseCode" ColumnName="courseCode" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spRetriveUserDocuments" FunctionName="WeLearnDBmsModel.Store.spRetriveUserDocuments">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WeLearnDBmsModel.spRetriveUserDocuments_Result">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="docText" ColumnName="docText" />
+          <ScalarProperty Name="docTime" ColumnName="docTime" />
+          <ScalarProperty Name="docDesc" ColumnName="docDesc" />
+          <ScalarProperty Name="docDate" ColumnName="docDate" />
+          <ScalarProperty Name="docContext" ColumnName="docContext" />
+          <ScalarProperty Name="docType" ColumnName="docType" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="fun_GetOrRetriveAllCoursesFromUser" FunctionName="WeLearnDBmsModel.Store.spRetriveAllCoursesFromUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WeLearnDBmsModel.fun_GetOrRetriveAllCoursesFromUser_Result">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="courseName" ColumnName="courseName" />
+          <ScalarProperty Name="courseCode" ColumnName="courseCode" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="fun_GetOrRetriveUserDocuments" FunctionName="WeLearnDBmsModel.Store.spRetriveUserDocuments">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WeLearnDBmsModel.fun_GetOrRetriveUserDocuments_Result">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="docText" ColumnName="docText" />
+          <ScalarProperty Name="docTime" ColumnName="docTime" />
+          <ScalarProperty Name="docDesc" ColumnName="docDesc" />
+          <ScalarProperty Name="docDate" ColumnName="docDate" />
+          <ScalarProperty Name="docContext" ColumnName="docContext" />
+          <ScalarProperty Name="docType" ColumnName="docType" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="fun_GetUserCourses" FunctionName="WeLearnDBmsModel.Store.spRetriveAllCoursesFromUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WeLearnDBmsModel.fun_GetUserCourses_Result">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="courseName" ColumnName="courseName" />
+          <ScalarProperty Name="courseCode" ColumnName="courseCode" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

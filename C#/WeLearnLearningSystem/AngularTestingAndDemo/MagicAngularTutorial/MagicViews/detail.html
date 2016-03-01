@@ -1,0 +1,35 @@
+﻿<div class="row">
+    <div class="col-md-6">
+        <img id="imgCard" class="img-responsive center-block" ng-src="{{'http://www.urzagatherer.com/cards/' + card.picturePath}}" />
+    </div>
+    <div class="col-md-6" id="detailsPane">
+        <div class="rowHeader">Name:</div>
+        <div class="rowData">{{card.nameEn}}</div>
+        <div class="rowHeader">Type:</div>
+        <div class="rowData">{{card.typeEn}}</div>
+        <div class="rowHeader">Text:</div>
+        <textarea class="rowData textEdit form-control" rows="5" ng-model="card.textEn" ng-change="update()"></textarea>
+        <div class="rowHeader">Flavor:</div>
+        <div class="rowData">{{card.flavorEn}}</div>
+        <div class="rowHeader">Price:</div>
+        <div class="rowData">{{card.price | currency}}</div>
+        <div class="rowHeader">Power Range:</div>
+        <div class="rowData">{{card.power}}</div>
+        <!--<div class="rowHeader">Rulings:</div>
+        
+            <textarea class="rowData textEdit form-control" rows="5" ng-repeat="desc in card.rulings" ng-model="desc.text" ng-change="update()">
+             
+            </textarea>-->
+
+        
+        <div ng-keypress="move($event)" tabindex="0">
+
+            <a><img class="img-responsive navArrows arrowLeft  col-md-3" ng-src="MagicScripts/arrow.png" ng-click="goLeft()" /></a>
+            <a><img class="img-responsive navArrows arrowRight col-md-3" ng-src="MagicScripts/arrow.png" ng-click="goRight()" /></a>
+        </div>
+        <div class="col-md-12">
+            <a><img class="img-responsive  mainMenu" ng-src="MagicScripts/menu.png" ng-click="goMenu()" /></a>
+        </div>
+    </div>
+
+</div>
