@@ -135,7 +135,7 @@
     <Content Include="Scripts\weLearnServices.js" />
     <Content Include="Styles\addEvent.css" />
     <Content Include="WeLearnGlobal.asax" />
-    <Content Include="WeLearnPages\addEvent.html" />
+    <Content Include="WeLearnPages\eventManager.html" />
     <Content Include="WeLearnPages\addUser.html" />
     <Content Include="WeLearnPages\loginPage.html" />
     <Content Include="WeLearnPages\mainMenu.html" />
@@ -181,7 +181,9 @@
     <Compile Include="ApplicationControllers\ChatMessagesHandler.cs" />
     <Compile Include="ApplicationControllers\LoginPortalHandler.cs" />
     <Compile Include="ApplicationControllers\ChatUsersHandler.cs" />
+    <Compile Include="ApplicationControllers\UpdateEventHandler.cs" />
     <Compile Include="ApplicationControllers\WeLearnHandlerInterface.cs" />
+    <Compile Include="ApplicationControllers\DeleteEventHandler.cs" />
     <Compile Include="Unnecessary\OldHandlers\ChatHandler.ashx.cs">
       <DependentUpon>ChatHandler.ashx</DependentUpon>
     </Compile>

@@ -1,14 +1,19 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using WeLearnControllers.BusinessFunctions;
 
 namespace AngularTestingAndDemo.ApplicationControllers
 {
     class ChatUsersHandler : WeLearnHandlerInterface
     {
+        // Remoting
+        private UserFacade userFacade;
+
         public void systemHandler(Dictionary<String, Object> data)
         {
 
@@ -19,50 +24,41 @@ namespace AngularTestingAndDemo.ApplicationControllers
             // Set type of expected string
             context.Response.ContentType = "text/html;charset=UTF-8";
 
+
+            // Authenticate user to see if it has firstly logged in if not then 
+            // Redirect that person
+            if (context.Session["userId"] ==  null       &&
+                context.Session["userFistName"] ==  null &&
+                context.Session["userLastName"] == null)
+            {
+                context.Response.Redirect("", false);
+                context.ApplicationInstance.CompleteRequest();
+                return; 
+            }
+
+            // Dictionary to hold data to be returned
+            Dictionary<String, Object> portalData = null;
+
             try
             {
-                string jsonString =
-                        "{ "
-                    + "\"people\": [ "
-                    + "{ "
-                    + "\"personId\": \"1\", "
-                    + "\"firstName\": \"Noam\", "
-                    + "\"lastName\": \"Chomsky\", "
-                    + "\"picture\": \"https://goo.gl/iF6m7A\" "
-                    + "}, "
-                    + "{ "
-                    + "\"personId\": \"2\", "
-                    + "\"firstName\": \"Michael\", "
-                    + "\"lastName\": \"Foucault\", "
-                    + "\"picture\": \"https://goo.gl/11ZVA2\" "
-                    + "}, "
-                    + "{ "
-                    + "\"personId\": \"3\", "
-                    + "\"firstName\": \"Martin\", "
-                    + "\"lastName\": \"Heidegger\", "
-                    + "\"picture\": \"http://goo.gl/8RaJgz\" "
-                    + "}, "
-                    + "{ "
-                    + "\"personId\": \"4\", "
-                    + "\"firstName\": \"Emma\", "
-                    + "\"lastName\": \"Goldman\", "
-                    + "\"picture\": \"https://goo.gl/hQqw1y\" "
-                    + "} "
-                    + "] "
-                    + "}";
+                // Retrive Person Id
+                Decimal personId = (Decimal)context.Session["userId"];
 
-                String test = jsonString;
-               
-                context.Response.Write(jsonString);
+                // Let us get all the users in the ChatRoom
+                userFacade = new UserFacade();
+                portalData = userFacade.getAllUsersInChatRoom(personId);
 
+                //String test = JsonConvert.SerializeObject(portalData);
 
+                // Send Object Serialized
+                context.Response.Write(JsonConvert.SerializeObject(portalData));
 
             }
-
-            catch (Exception e)
+            catch (Exception ex)
             {
-                e.ToString();
+                ex.ToString();
             }
+
         }
     }
 }

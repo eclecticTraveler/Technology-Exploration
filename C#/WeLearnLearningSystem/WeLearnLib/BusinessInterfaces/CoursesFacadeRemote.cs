@@ -9,11 +9,11 @@ namespace WeLearnLib.BusinessInterfaces
 {
     public interface CoursesFacadeRemote
     {
-        void create(Course course);
+        void create(Course course, Decimal userLogged);
 
-        void edit(Course course);
+        void edit(Course course, Decimal userLogged);
 
-        void remove(Course course);
+        void remove(Course course, Decimal userLogged);
 
         //Course find(Object id);
 

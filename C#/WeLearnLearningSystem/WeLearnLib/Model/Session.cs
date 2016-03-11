@@ -17,6 +17,7 @@ namespace WeLearnLib.Model
         public long sessionId { get; set; }
         public long userId { get; set; }
         public long documentId { get; set; }
+        public Nullable<long> receiverId { get; set; }
     
         public virtual Document Document { get; set; }
         public virtual User User { get; set; }

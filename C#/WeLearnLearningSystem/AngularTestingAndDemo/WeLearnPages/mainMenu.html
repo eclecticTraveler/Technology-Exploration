@@ -44,11 +44,25 @@ Alberto Arellano 10/15/2015 12:05 am
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse in">
                     <div class="panel-body">
-                        <div id="eventDayheader" class="dayHeaderStyle"><span class="dayheaderTitle">Today</span></div>
+                        <div id="eventDayheader" class="dayHeaderStyle"><span class="dayheaderTitle">Today: {{currentTime}}</span></div>
                         <hr />
-
-                        <div id="singleEvent" class="singleEventStyle" ng-repeat="event in events">
-                            <span id="eventTitle"> {{event.Desc}}</span><br /><span id="whenIsDue">{{event.docText.Due}}</span>
+                        <!--Order does it by the dash and then the individual property, true is for ASC-->
+                        <div id="singleEvent" class="singleEventStyle" ng-repeat="event in singleEvent track by event.Id | orderBy: ['-Date','-Time']:true">
+                            <span class="eventPanelEditErase">
+                                <i class="glyphicon glyphicon-edit editEvent" ng-click="editEvent(event)"></i>
+                                <i class="glyphicon glyphicon-remove removeEvent" ng-click="eraseEvent(event)"></i>
+                            </span>
+                            <span class="bodyOfEvent">
+                                <span id="importance" ng-class="{critical: event.levelOfImportance==='Critical',
+                                                            veryImportant: event.levelOfImportance==='Very Important',
+                                                            trivial: event.levelOfImportance==='Trivial' }"><b>Importance:</b>{{event.levelOfImportance}}</span>
+                                <br />
+                                <span id="eventTitle" class="forceStringToBreak"><b>Event:</b> {{event.Title}}</span>
+                                <br />
+                                <span id="eventDescrip" class="forceStringToBreak"><b>Due:</b> {{event.Due}}</span>
+                                <br />
+                                <span id="whenIsDue" class="forceStringToBreak"><b>Description:</b>  {{event.Description}}</span>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -77,7 +91,8 @@ Alberto Arellano 10/15/2015 12:05 am
                 <div id="collapseTwo" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <div id="singleCourse" class="singleCourseStyle" ng-repeat="course in courses">
-                            <span id="courseTitle"><i> {{course.courseName}} </i></span> <span id="grade">{{course.courseCode}}</span>
+                            <span id="courseCode"><i>{{course.courseCode}} :</i></span>
+                            <span id="courseTitle"><b> {{course.courseName}} </b></span> 
                         </div>
                     </div>
                 </div>

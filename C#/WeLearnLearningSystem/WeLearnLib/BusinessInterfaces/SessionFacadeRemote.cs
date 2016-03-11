@@ -9,11 +9,11 @@ namespace WeLearnLib.BusinessInterfaces
 {
     public interface SessionFacadeRemote
     {
-        void create(Session session);
+        void create(Session session, Decimal userLogged);
 
-        void edit(Session session);
+        void edit(Session session, Decimal userLogged);
 
-        void remove(Session session);
+        void remove(Session session, Decimal userLogged);
 
         //Session find(Object id);
 

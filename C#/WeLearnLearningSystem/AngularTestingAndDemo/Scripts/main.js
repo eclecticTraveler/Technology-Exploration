@@ -1,8 +1,8 @@
-﻿var main = angular.module('weLearnApp', ['ngRoute', 'weLearnCntlrs', 'weLearnService', 'weLearnDirectives']);
+﻿var main = angular.module('weLearnApp', ['ngRoute', 'weLearnCntlrs', 'weLearnService', 'weLearnDirectives', 'datePicker', 'timePicker', 'ui.bootstrap']);
 
 main.config([
-    '$routeProvider',
-    function ($routeProvider) {
+    '$routeProvider', '$locationProvider',
+    function ($routeProvider, $locationProvider) {
         $routeProvider.
             when('/', {
                 templateUrl: 'WeLearnPages/loginPage.html',
@@ -16,8 +16,18 @@ main.config([
                 templateUrl: 'WeLearnPages/chatRoom.html',
                 controller: 'chatRoomController'
             }).
+            when('/EventManager', {
+                templateUrl: 'WeLearnPages/eventManager.html',
+                controller: 'eventManagerController'
+            }).
             otherwise({
                 redirectTo: '/'
             });
+
+        // In order to get rid of the # from the URL
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: true
+        });
     }
 ]);

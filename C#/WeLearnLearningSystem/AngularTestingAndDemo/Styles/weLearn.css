@@ -108,7 +108,7 @@ a:hover
 }
 hr
 {
-     margin-top: -8px !important;;
+     margin-top: -8px !important;
      border-top: 2px solid #CCC9C9 !important;;
 }
 .accordionPos
@@ -139,11 +139,27 @@ hr
 .singleCourseStyle,
 .singleGradedAssigntStyle
 {
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     border-radius: 25px;
     padding: 10px 10px 10px 10px;
     margin-bottom: 10px;
+    border-style: ridge;
+    border-color: #CAC5C5;
+    border-width: 2px;
 }
+
+.singleCourseStyle, .singleEventStyle, .singleGradedAssigntStyle {
+    -webkit-transition: -webkit-transform 0.1s ease;
+    -moz-transition: -moz-transform 0.1s ease;
+    transition: transform 0.1s ease;
+}
+
+    .singleCourseStyle:hover, .singleEventStyle:hover, .singleGradedAssigntStyle:hover {
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        transform: scale(1.1);
+        cursor: pointer;
+    }
 .dayHeaderStyle
 {
     text-align: center;
@@ -168,6 +184,13 @@ hr
 .menuItems
 {
     padding-top: 16px !important;
+    cursor: pointer;
+}
+.dropdown-menu>li>a {
+    cursor: pointer !important;
+}
+.panel-group{
+    box-shadow: 4px 2px 20px grey !important;
 }
 .smallMenu
 {
@@ -218,6 +241,28 @@ hr
     font-size: 25px;
     right: -60px;
 }
+
+.ajax-loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -32px; /* -1 * image width / 2 */
+    margin-top: -32px;  /* -1 * image height / 2 */
+    display: block;     
+    width: 50px;
+}
+
+#loadingEvent{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:1000;
+    background-color:grey;
+    opacity: .8;
+ }
+
 /************************************
 * SMALL MOBILE VERSION
 ************************************/
@@ -237,6 +282,24 @@ hr
       background-color: transparent !important;
     }*/
 
-    
+    .ajax-loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -32px; /* -1 * image width / 2 */
+    margin-top: -32px;  /* -1 * image height / 2 */
+    display: block;  
+    width: 50px;   
+}
 
+ #loadingEvent{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:1000;
+    background-color:grey;
+    opacity: .8;
+ }
    }

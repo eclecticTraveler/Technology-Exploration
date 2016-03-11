@@ -26,7 +26,7 @@ namespace WeLearnLib.LazyObjTransformation
 
                 // Remove the Lazy Objects appended to the List and solidify Object with necessary data
 
-                if (lazyProperties is List<fun_IsUserInSystem_Result>)
+                if (lazyProperties is List<fun_IsUserInSystem_Result>) 
                 {
                     // Cast object to its proper type
                     List<fun_IsUserInSystem_Result> userProperties = (List<fun_IsUserInSystem_Result>)lazyProperties;
@@ -81,6 +81,31 @@ namespace WeLearnLib.LazyObjTransformation
                   return userEventsList;
 
               }
+                else if (lazyProperties is List<fun_GetAllChatUsers_Result>)
+                {
+                    // Cast object to its proper type
+                    List<fun_GetAllChatUsers_Result> chatUsersProperties = (List<fun_GetAllChatUsers_Result>)lazyProperties;
+                    // Make new list to get all Events from user into
+                    List<UserSerializable> userChatList = new List<UserSerializable>();
+
+                    foreach (var chatUser in chatUsersProperties)
+                    {
+                        // Reshape LazyObject
+                        userChatList.Add( new UserSerializable(
+                               chatUser.userId
+                             , chatUser.lastName
+                             , chatUser.firstName
+                             , chatUser.email
+                             , chatUser.gender
+                             , chatUser.typeOfUser
+                             , chatUser.userPicAddress
+                             ));
+                    }
+
+                    return userChatList;
+                }
+
+
                 return null;
                 
             }

@@ -10,6 +10,8 @@ function weLearnCache($resource) {
     var userProfile = [];
     var userCourses = [];
     var userEvents = [];
+    var innerUserEvents = [];
+    var eventToBeEdited = [];
 
     return {
         setAllUserInfo: function (userInfo) {
@@ -36,6 +38,39 @@ function weLearnCache($resource) {
         getUserEvents: function () {
             return userEvents;
         },
+        setInnerUserEvents: function (innerEvents) {
+            innerUserEvents = innerEvents;
+        },
+        getInnerUserEvents: function () {
+            return innerUserEvents;
+        },
+        pushInnerUserEvents: function (innerEvent) {
+            if (innerEvent !== null || innerEvent !== undefined) {
+                innerUserEvents.push(innerEvent);
+            }
+            
+        },
+        setEventToBeEdited: function (event) {
+            eventToBeEdited = event;
+        },
+        getEventToBeEdited: function () {
+            return eventToBeEdited;
+        },
+        setUpdatedEvent: function (event, uuid) {
+            // Find index of object that has this UUID in InnerUserEVents
+            for (var i = 0; i < innerUserEvents.length; i++) {
+                // If the object in the current position has a UUID store new Object
+                if (innerUserEvents[i].Id === uuid) {
+                    // Position, howmany to remove, and obj that will subtite it
+                    innerUserEvents.splice(i, 1, event);
+                    break;
+                }
+            }
+
+        }
+
+
+        
     }
 
     //var cachedData;
@@ -67,34 +102,42 @@ function usersCache() {
     var showBigResolMenuNav = false;
     var showHambuguerButton = false;
     var personFullName = "";
- 
+    var personPicAddress = "";
+    var subtitleOnEventPage = "Default";
+    var buttonLabelOnEventPage = "Default";
+
     var allUsers = [];
 
-    var upperBarItems = 
+    var upperBarItems =
      {
          webTitle: 'We Learn',
          messages: 'Messages',
          notifications: 'Notifications',
          profile: 'Profile',
          inbox: 'Inbox',
-         calendar: "Calendar",
+         calendar: "Event Manager",
          settings: 'Settings',
          logout: 'Log Out'
 
      };
 
-   return {
-       setSelectedPersonInfo: function (userId) {
-           angular.forEach(chatParticipants, function (value, key) {
-               if (value.personId === userId) {
-                   personFullName = value.firstName + " " + value.lastName;
-                   console.log(personFullName);
-               }
-           });         
-       },
-       getSelectedPersonInfo: function () {
-           return personFullName;
-       },
+    return {
+        setSelectedPersonInfo: function (userId) {
+            angular.forEach(chatParticipants, function (value, key) {
+                // If we find the person we are looking for
+                if (value.personId === userId) {
+                    // Get his or her name and picture
+                    personFullName = value.firstName + " " + value.lastName;
+                    personPicAddress = value.userPicAddress;
+                }
+            });
+        },
+        getSelectedPersonInfo: function () {
+            return personFullName;
+        },
+        getSelectedPersonPic: function () {
+            return personPicAddress;
+        },
         setChatMessages: function (messages) {
             chatMessages = messages;
         },
@@ -136,7 +179,20 @@ function usersCache() {
         },
         getUpperBarItems: function () {
             return upperBarItems;
+        },
+        setSubtitleOnEventPage: function (subTitle) {
+            subtitleOnEventPage = subTitle;
+        },
+        getSubtitleOnEventPage: function () {
+            return subtitleOnEventPage;
+        },
+        setButtonLabelOnEventPage: function (buttonTitle) {
+            buttonLabelOnEventPage = buttonTitle;
+        },
+        getButtonLabelOnEventPage: function () {
+            return buttonLabelOnEventPage;
         }
+
     }
 
 };

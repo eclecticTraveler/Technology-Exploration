@@ -37,7 +37,7 @@
 
                                         <li class="contact col-md-4" ng-repeat="user in chatUsers | filter:chatUserSearch | orderBy:'firstName'">
                                             <div class="contact col-md-4" ng-click="chatWithThisPerson(user.personId)">
-                                                <img ng-src={{user.picture}} alt="User" class="contactphoto setPicSize" />
+                                                <img alt="User" class="contactphoto setPicSize" ng-src="{{user.userPicAddress}}" />
                                                 <span class="contactName">{{user.firstName + " " + user.lastName}} </span>
                                                 <span class="contactStatus"></span>
                                             </div>
@@ -56,7 +56,7 @@
                    
                         <div ng-repeat="user in chatUsers | filter:chatUserSearch">
                             <div class="contact col-md-4" ng-click="chatWithThisPerson(user.personId)">
-                                <img ng-src={{user.picture}} alt="User" class="contactphoto setPicSize"/>
+                                <img alt="User" class="contactphoto setPicSize" ng-src="{{user.userPicAddress}}" />
                                 <span class="contactName">{{user.firstName + " " + user.lastName}} </span>
                                 <span class="contactStatus"></span>
                             </div>
@@ -129,12 +129,15 @@
                                 </div>
 
                                 <!-- Right Side Header -->
-                                <span class="chat__status">status</span>
-                                <div class="chat__person">
-                                    <span class="chat__online active"></span>
-                                    <span class="chat__name">{{personChattingWith}}</span>
-                                </div>
 
+                                
+                                <span class="chat__status">talking with</span>
+                                <div class="chat__person">                                                                      
+                                   <span class="chat__online active"></span>
+                                    <span class="chat__name">{{personChattingWith}}</span>
+                                    <img ng-src="{{picOfUserChattingWith}}" alt="User" class="contactphoto setPicSize" style="margin-right: 0px;"/> 
+                                </div>
+                                
                                 <hr class="chatBoxHeader">
 
                                 <!-- Start of Chat Messeages     chat-message-list="chatMsn"-->
@@ -149,19 +152,20 @@
 
                                     </div>
 
-                                    <!-- Sender -->
+                                    <!-- Sender Is the Person logged in that sends msn-->
+                                    <!--If the message has the Sender Id equal to the one that logged in set html in Sender mode-->
                                     <div ng-repeat="chatMessage in chatMsn">
-                                        <div ng-if="chatMessage.Sender == 'Noam Chomsky'">
+                                        <div ng-if="chatMessage.SenderId == loggedPersonId">
                                             <div class="chat__msgRow">
                                                 <span class="chat-img pull-right">
-                                                    <img src="https://goo.gl/iF6m7A" alt="Me" class="img-circle" />
+                                                    <img ng-src="{{userloggedPic}}" alt="Me" class="img-circle" />
                                                 </span>
                                                 <div class="chat-body clearfix">
                                                     <div class="header">
                                                         <small class="setTimeLeft text-muted">
                                                             <span class="glyphicon glyphicon-time"></span>{{chatMessage.Date + " " + chatMessage.Time}}
                                                         </small>
-                                                        <strong class=" pull-right primary-font">{{chatMessage.Sender}}</strong>
+                                                        <strong class=" pull-right primary-font">{{loggedPersonName}}</strong>
                                                     </div>
                                                     <p class="chat__message mine">{{chatMessage.Message}}</p>
                                                 </div>
@@ -170,15 +174,15 @@
 
 
 
-                                        <!-- Receiver -->
-                                        <div ng-if="chatMessage.Sender != 'Noam Chomsky'">
+                                        <!-- Receiver the person that gets messages-->
+                                        <div ng-if="chatMessage.SenderId != loggedPersonId">
                                             <div class="chat__msgRow">
                                                 <span class="chat-img pull-left">
-                                                    <img src="https://goo.gl/hQqw1y" alt="You" class="img-circle" />
+                                                    <img ng-src="{{picOfUserChattingWith}}" alt="You" class="img-circle" />
                                                 </span>
                                                 <div class="chat-body clearfix">
                                                     <div class="Header">
-                                                        <strong class="primary-font leftNameIndent">{{chatMessage.Sender}}</strong> <small class="pull-right text-muted">
+                                                        <strong class="primary-font leftNameIndent">{{personChattingWith}}</strong> <small class="pull-right text-muted">
                                                             <span class="glyphicon glyphicon-time"></span>{{chatMessage.Date + " " + chatMessage.Time}}
 
                                                         </small>
@@ -198,7 +202,7 @@
                             <!-- Input for chat box -->
                             <div id="chatInputWrapper" class="inner-addon left-addon ">
                                 <i class="glyphicon glyphicon-camera camPointer"></i>
-                                <input type="text" class="form-control chat__input" placeholder="Your message" ng-model="chatInput" />
+                                <input type="text" class="form-control chat__input" placeholder="Your message" ng-model="chatInput" ng-disabled="isChatBarDisabled" />
                             </div>
                         </div>
                     </div>

@@ -18,12 +18,13 @@ namespace AngularTestingAndDemo.Handlers.OldHandlers
         public void init()
         {
           
-            appController.mapCommand("login"       , new ApplicationControllers.LoginPortalHandler());
-            appController.mapCommand("loadMessages", new ApplicationControllers.ChatMessagesHandler());
-            appController.mapCommand("loadUsers"   , new ApplicationControllers.ChatUsersHandler());
-            appController.mapCommand("userEvents"  , new ApplicationControllers.CalendarHandler());
-
-            
+            appController.mapCommand("login"           , new ApplicationControllers.LoginPortalHandler());
+            appController.mapCommand("loadMessages"    , new ApplicationControllers.ChatMessagesHandler());
+            appController.mapCommand("loadUsers"       , new ApplicationControllers.ChatUsersHandler());
+            appController.mapCommand("addChatMessage"  , new ApplicationControllers.AddChatMessageHandler());
+            appController.mapCommand("addEvent"        , new ApplicationControllers.AddEventHandler());
+            appController.mapCommand("updateEvent"     , new ApplicationControllers.UpdateEventHandler());
+            appController.mapCommand("deleteEvent"     , new ApplicationControllers.DeleteEventHandler());
 
         }
         public void ProcessRequest(HttpContext context)

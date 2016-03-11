@@ -9,6 +9,7 @@ using WeLearnControllers.BusinessFunctions;
 using System.Web.Script.Serialization;
 using WeLearnLib.LazyObjTransformation;
 using Newtonsoft.Json;
+using System.Runtime.Remoting.Contexts;
 //using WeLearnControllers;
 
 
@@ -41,8 +42,7 @@ namespace AngularTestingAndDemo.ApplicationControllers
             // Send values to be evaluated
                 try
                 {
-
-                    // Evaluate that the username and password inserted by the user are not null or empty
+                    // Double check just in the very remote case the front end did not handle well the input for these fields
                     // before sending it remotely accross the web to see if it exists
                     if (username == "undefined"  ||  password == "undefined" ||
                         username == null         ||  password == null        ||
@@ -50,7 +50,12 @@ namespace AngularTestingAndDemo.ApplicationControllers
                     {
                         // So if the username field or password is missing when they first log in we will redirect and terminate 
                         // the execution of the code until the fields are completed properly
-                        context.Response.Redirect("index.html", true);
+                        // Since I am using the $locationProvider on the front end I don't need to specify the root since it will handle
+                        // all for me otherwise when it makes a 404 no found it will return the whole index html page 
+                        context.Response.Redirect("", false);
+                        context.ApplicationInstance.CompleteRequest();
+                        return;                   
+                       
                     }
 
                     // Communicate to remote function to get all info about person trying to log-in
@@ -59,31 +64,45 @@ namespace AngularTestingAndDemo.ApplicationControllers
                     // since I don't how to set it up in asp.net I had to do it this way
 
                     // Instance of userFacade
-                    UserFacade userFacade = new UserFacade();
+                    userFacade = new UserFacade();
                     // Execute Remote function call to evaluate the username and password
                     portalData = userFacade.login(username, password);
 
                     // Evaluate if there is a user with that usename and password
                     if (portalData == null)
                     {
-                        // Redirect with error
-                        context.Response.Redirect("index.html", true);
+                        // Redirect with error, tipically its documented to use true
+                        // for the second parameter but that causes to through an exceptio
+                        // which is aborting thread which does the trick but its definetely 
+                        // poor login so I use false which does the redirect but won't terminate the execution of the code
+                        // the following line will terminate the request and I use return to not allow any further code to be executed
+                        // Since I am using the $locationProvider on the front end I don't need to specify the root since it will handle
+                        // all for me otherwise when it makes a 404 no found it will return the whole index html page 
+                        context.Response.Redirect("", false);
+                        context.ApplicationInstance.CompleteRequest();
+                        return;
                     }
 
                     // Up to this point user should exist so lets Store User Locally
                     // By retriving the user profile 
-                    if (portalData.ContainsKey("UserProfile"))
-                    {
+                    if (portalData.ContainsKey("UserProfile")){
                         userLogged = (UserSerializable)portalData["UserProfile"];
                     }
+                    else {
+                        // Redirect with error
+                        context.Response.Redirect("", false);
+                        context.ApplicationInstance.CompleteRequest();
+                        return; 
+                    }
+                       
                     // and saving authentication token on session
                     context.Session["userId"] = userLogged.getPersonId();
                     context.Session["userFistName"] = userLogged.getFirstName();
                     context.Session["userLastName"] = userLogged.getLastName();
 
                     // Return Serialized object to Http Request back in AngularJS
-                    JavaScriptSerializer js = new JavaScriptSerializer();
-                    String testJSSerializer = js.Serialize(portalData);
+                    //JavaScriptSerializer js = new JavaScriptSerializer();
+                    //String testJSSerializer = js.Serialize(portalData);
                     String testSerialization = JsonConvert.SerializeObject(portalData);
 
                     // Send Object Serialized

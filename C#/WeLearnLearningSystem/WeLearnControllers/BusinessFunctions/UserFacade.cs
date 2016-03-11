@@ -20,6 +20,7 @@ namespace WeLearnControllers.BusinessFunctions
         private UserSerializable user;
         private List<CoursesSerializable> userCourses;
         private List<EventsSerializable> userEvents;
+        private List<UserSerializable> chatUsers;
 
         public UserFacade()
             : base(typeof(User))
@@ -36,9 +37,37 @@ namespace WeLearnControllers.BusinessFunctions
             return null;
         }
 
-        public List<User> getAllUsers()
+        /// <summary>
+        /// This method will retrive all the people for the chat and will use the same class 
+        /// to Make them serializable
+        /// </summary>
+        /// <param name="personId"></param>
+        /// <returns></returns>
+        public Dictionary<String, Object> getAllUsersInChatRoom(Decimal personId)
         {
-            return null;
+            // Check that null or empty was not sent this far because it should've been handled it before
+            if (personId <= 0)
+            {
+                return null;
+            }
+            // Dictionary to be returned
+            Dictionary<String, Object> loginData = new Dictionary<string, object>();  
+            // Create instance for mapped functions to DBprocedures to retrive data
+            WeLearnDBmsEntities dbEntities = new WeLearnDBmsEntities();
+            // the var below is of return type -> ObjectResult<fun_GetAllChatUsers_Result>
+            var dbAllChatUsersLazyObjects = dbEntities.fun_GetAllChatUsers((long)personId);
+            // Transform results in a list type           
+            List<fun_GetAllChatUsers_Result> dbAllChatUserList = dbAllChatUsersLazyObjects.ToList();
+            // If its valid send it over to get it solidified 
+            if (dbAllChatUserList.Capacity > 0)
+                chatUsers = (List<UserSerializable>)ReshapeProperties.solidifyDatabaseObjects(dbAllChatUserList);
+            else
+                return null;
+
+            // Lets wrap all into a dictionary
+            loginData.Add("chatUsers", chatUsers);
+
+            return loginData;
         }
 
         /// <summary>
@@ -46,13 +75,21 @@ namespace WeLearnControllers.BusinessFunctions
         /// if the user is indeed valid, if so then it will send the object to be
         /// solidify because by itself it won't be serializable due to its lazy dependencies
         /// Plus we want to send back only data that is important, not the username and password
-        /// again since it can be hacked
+        /// again since it can be hacked.
+        /// Now that I think about it I would have to refactor as I did all in this function
+        /// instead of delegating the work to the Document facade for the events and for the courses
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
         public Dictionary<String, Object> login(String username, String password)
         {
+            // Check that null or empty was not sent this far because it should've been handled it before
+            if (username == null || username == "" || username == "undefined" &&
+                password == null || password == "" || password == "undefined")
+            {
+                return null;
+            }
 
             // Create instance for mapped functions to DBprocedures to retrive data
             WeLearnDBmsEntities dbEntities = new WeLearnDBmsEntities();

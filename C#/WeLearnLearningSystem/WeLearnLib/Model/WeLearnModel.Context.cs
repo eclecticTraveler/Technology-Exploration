@@ -137,17 +137,13 @@ namespace WeLearnLib.Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     
-        public virtual ObjectResult<spAllUsers_Result> spAllUsers(string username, string password)
+        public virtual ObjectResult<spAllUsers_Result> spAllUsers(Nullable<long> userId)
         {
-            var usernameParameter = username != null ?
-                new ObjectParameter("username", username) :
-                new ObjectParameter("username", typeof(string));
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(long));
     
-            var passwordParameter = password != null ?
-                new ObjectParameter("password", password) :
-                new ObjectParameter("password", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spAllUsers_Result>("spAllUsers", usernameParameter, passwordParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spAllUsers_Result>("spAllUsers", userIdParameter);
         }
     
         public virtual ObjectResult<Nullable<long>> spInsertWeLearnUser(string firstName, string lastName, string email, string username, string password, string gender, string typeOfUser, string userPicAddress)
@@ -200,17 +196,13 @@ namespace WeLearnLib.Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spIsUserInSystem_Result>("spIsUserInSystem", usernameParameter, passwordParameter);
         }
     
-        public virtual ObjectResult<func_GetAllUsers_Result> func_GetAllUsers(string username, string password)
+        public virtual ObjectResult<func_GetAllUsers_Result> func_GetAllUsers(Nullable<long> userId)
         {
-            var usernameParameter = username != null ?
-                new ObjectParameter("username", username) :
-                new ObjectParameter("username", typeof(string));
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(long));
     
-            var passwordParameter = password != null ?
-                new ObjectParameter("password", password) :
-                new ObjectParameter("password", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<func_GetAllUsers_Result>("func_GetAllUsers", usernameParameter, passwordParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<func_GetAllUsers_Result>("func_GetAllUsers", userIdParameter);
         }
     
         public virtual ObjectResult<fun_IsUserInSystem_Result> fun_IsUserInSystem(string username, string password)
@@ -277,6 +269,183 @@ namespace WeLearnLib.Model
                 new ObjectParameter("userId", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<fun_GetUserCourses_Result>("fun_GetUserCourses", userIdParameter);
+        }
+    
+        public virtual ObjectResult<fun_GetAllChatUsers_Result> fun_GetAllChatUsers(Nullable<long> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<fun_GetAllChatUsers_Result>("fun_GetAllChatUsers", userIdParameter);
+        }
+    
+        public virtual ObjectResult<spRetriveUserChatConversation_Result> spRetriveUserChatConversation(Nullable<long> userLoggedIn, Nullable<long> userChattingWith)
+        {
+            var userLoggedInParameter = userLoggedIn.HasValue ?
+                new ObjectParameter("userLoggedIn", userLoggedIn) :
+                new ObjectParameter("userLoggedIn", typeof(long));
+    
+            var userChattingWithParameter = userChattingWith.HasValue ?
+                new ObjectParameter("userChattingWith", userChattingWith) :
+                new ObjectParameter("userChattingWith", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spRetriveUserChatConversation_Result>("spRetriveUserChatConversation", userLoggedInParameter, userChattingWithParameter);
+        }
+    
+        public virtual ObjectResult<spGetUserChatConversation_Result> spGetUserChatConversation(Nullable<long> userLoggedIn, Nullable<long> userChattingWith)
+        {
+            var userLoggedInParameter = userLoggedIn.HasValue ?
+                new ObjectParameter("userLoggedIn", userLoggedIn) :
+                new ObjectParameter("userLoggedIn", typeof(long));
+    
+            var userChattingWithParameter = userChattingWith.HasValue ?
+                new ObjectParameter("userChattingWith", userChattingWith) :
+                new ObjectParameter("userChattingWith", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetUserChatConversation_Result>("spGetUserChatConversation", userLoggedInParameter, userChattingWithParameter);
+        }
+    
+        public virtual int spInsertUserEvent(string docUUID, string docType, string docCont, string docText, Nullable<long> docVer, Nullable<System.DateTime> docDate, string docDesc, Nullable<long> sessionUserId)
+        {
+            var docUUIDParameter = docUUID != null ?
+                new ObjectParameter("docUUID", docUUID) :
+                new ObjectParameter("docUUID", typeof(string));
+    
+            var docTypeParameter = docType != null ?
+                new ObjectParameter("docType", docType) :
+                new ObjectParameter("docType", typeof(string));
+    
+            var docContParameter = docCont != null ?
+                new ObjectParameter("docCont", docCont) :
+                new ObjectParameter("docCont", typeof(string));
+    
+            var docTextParameter = docText != null ?
+                new ObjectParameter("docText", docText) :
+                new ObjectParameter("docText", typeof(string));
+    
+            var docVerParameter = docVer.HasValue ?
+                new ObjectParameter("docVer", docVer) :
+                new ObjectParameter("docVer", typeof(long));
+    
+            var docDateParameter = docDate.HasValue ?
+                new ObjectParameter("docDate", docDate) :
+                new ObjectParameter("docDate", typeof(System.DateTime));
+    
+            var docDescParameter = docDesc != null ?
+                new ObjectParameter("docDesc", docDesc) :
+                new ObjectParameter("docDesc", typeof(string));
+    
+            var sessionUserIdParameter = sessionUserId.HasValue ?
+                new ObjectParameter("sessionUserId", sessionUserId) :
+                new ObjectParameter("sessionUserId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertUserEvent", docUUIDParameter, docTypeParameter, docContParameter, docTextParameter, docVerParameter, docDateParameter, docDescParameter, sessionUserIdParameter);
+        }
+    
+        public virtual int fun_InsertUserEvent(string docUUID, string docType, string docCont, string docText, Nullable<long> docVer, Nullable<System.DateTime> docDate, string docDesc, Nullable<long> sessionUserId)
+        {
+            var docUUIDParameter = docUUID != null ?
+                new ObjectParameter("docUUID", docUUID) :
+                new ObjectParameter("docUUID", typeof(string));
+    
+            var docTypeParameter = docType != null ?
+                new ObjectParameter("docType", docType) :
+                new ObjectParameter("docType", typeof(string));
+    
+            var docContParameter = docCont != null ?
+                new ObjectParameter("docCont", docCont) :
+                new ObjectParameter("docCont", typeof(string));
+    
+            var docTextParameter = docText != null ?
+                new ObjectParameter("docText", docText) :
+                new ObjectParameter("docText", typeof(string));
+    
+            var docVerParameter = docVer.HasValue ?
+                new ObjectParameter("docVer", docVer) :
+                new ObjectParameter("docVer", typeof(long));
+    
+            var docDateParameter = docDate.HasValue ?
+                new ObjectParameter("docDate", docDate) :
+                new ObjectParameter("docDate", typeof(System.DateTime));
+    
+            var docDescParameter = docDesc != null ?
+                new ObjectParameter("docDesc", docDesc) :
+                new ObjectParameter("docDesc", typeof(string));
+    
+            var sessionUserIdParameter = sessionUserId.HasValue ?
+                new ObjectParameter("sessionUserId", sessionUserId) :
+                new ObjectParameter("sessionUserId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("fun_InsertUserEvent", docUUIDParameter, docTypeParameter, docContParameter, docTextParameter, docVerParameter, docDateParameter, docDescParameter, sessionUserIdParameter);
+        }
+    
+        public virtual int spUpdateUserEvent(string docUUID, string docText, Nullable<long> docVer, Nullable<System.DateTime> docDate, string docDesc)
+        {
+            var docUUIDParameter = docUUID != null ?
+                new ObjectParameter("docUUID", docUUID) :
+                new ObjectParameter("docUUID", typeof(string));
+    
+            var docTextParameter = docText != null ?
+                new ObjectParameter("docText", docText) :
+                new ObjectParameter("docText", typeof(string));
+    
+            var docVerParameter = docVer.HasValue ?
+                new ObjectParameter("docVer", docVer) :
+                new ObjectParameter("docVer", typeof(long));
+    
+            var docDateParameter = docDate.HasValue ?
+                new ObjectParameter("docDate", docDate) :
+                new ObjectParameter("docDate", typeof(System.DateTime));
+    
+            var docDescParameter = docDesc != null ?
+                new ObjectParameter("docDesc", docDesc) :
+                new ObjectParameter("docDesc", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spUpdateUserEvent", docUUIDParameter, docTextParameter, docVerParameter, docDateParameter, docDescParameter);
+        }
+    
+        public virtual int fun_UpdateUserEvent(string docUUID, string docText, Nullable<long> docVer, Nullable<System.DateTime> docDate, string docDesc)
+        {
+            var docUUIDParameter = docUUID != null ?
+                new ObjectParameter("docUUID", docUUID) :
+                new ObjectParameter("docUUID", typeof(string));
+    
+            var docTextParameter = docText != null ?
+                new ObjectParameter("docText", docText) :
+                new ObjectParameter("docText", typeof(string));
+    
+            var docVerParameter = docVer.HasValue ?
+                new ObjectParameter("docVer", docVer) :
+                new ObjectParameter("docVer", typeof(long));
+    
+            var docDateParameter = docDate.HasValue ?
+                new ObjectParameter("docDate", docDate) :
+                new ObjectParameter("docDate", typeof(System.DateTime));
+    
+            var docDescParameter = docDesc != null ?
+                new ObjectParameter("docDesc", docDesc) :
+                new ObjectParameter("docDesc", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("fun_UpdateUserEvent", docUUIDParameter, docTextParameter, docVerParameter, docDateParameter, docDescParameter);
+        }
+    
+        public virtual int spDeleteNotPermanentlyUserEvent(string docUUID)
+        {
+            var docUUIDParameter = docUUID != null ?
+                new ObjectParameter("docUUID", docUUID) :
+                new ObjectParameter("docUUID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spDeleteNotPermanentlyUserEvent", docUUIDParameter);
+        }
+    
+        public virtual int spDeleteUserEvent(string docUUID)
+        {
+            var docUUIDParameter = docUUID != null ?
+                new ObjectParameter("docUUID", docUUID) :
+                new ObjectParameter("docUUID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spDeleteUserEvent", docUUIDParameter);
         }
     }
 }

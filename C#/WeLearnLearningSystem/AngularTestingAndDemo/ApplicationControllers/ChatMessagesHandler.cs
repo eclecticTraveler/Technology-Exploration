@@ -1,14 +1,20 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using WeLearnControllers.BusinessFunctions;
+using WeLearnLib.LazyObjTransformation;
 
 namespace AngularTestingAndDemo.ApplicationControllers
 {
     public class ChatMessagesHandler : WeLearnHandlerInterface
     {
+        // Remote
+        private DocumentFacade userDocumentsFacade;
+        private List<ChatMessagesSerializable> chatConversation;
         public void systemHandler(Dictionary<String, Object> data)
         {
             try
@@ -20,108 +26,60 @@ namespace AngularTestingAndDemo.ApplicationControllers
                 // Set type of expected string
                 context.Response.ContentType = "text/html;charset=UTF-8";
 
+                // Authenticate user to see if it has firstly logged in if not then 
+                // Redirect that person
+                if (context.Session["userId"] == null &&
+                    context.Session["userFistName"] == null &&
+                    context.Session["userLastName"] == null)
+                {
+                    context.Response.Redirect("", false);
+                    context.ApplicationInstance.CompleteRequest();
+                    return;
+                }
+
+                // Get person that user wish to talk with from URL
+                Decimal personToTalkWith = Convert.ToDecimal(context.Request.Params["to"]);
+
+                // Dictionary to hold data to be returned
+                Dictionary<String, Object> portalData = null;
+
+                    // Retrive Person Id
+                    Decimal personLogged = (Decimal)context.Session["userId"];
+
+                    // Let us get all the users in the ChatRoom
+                    userDocumentsFacade = new DocumentFacade();
+                    portalData = userDocumentsFacade.getChatConversation(personLogged, personToTalkWith);
+
+                    // Make sure PortalData is not null if its then return
+                    if (portalData == null){                    
+                        context.ApplicationInstance.CompleteRequest();
+                        return;
+                    }
+
+                    
+                    if (portalData.ContainsKey("chatMessages")){
+                        chatConversation = (List<ChatMessagesSerializable>)portalData["chatMessages"];
+                    } else {
+                        // Redirect with error
+                        context.ApplicationInstance.CompleteRequest();
+                        return; 
+                    }
+
+                    String test = JsonConvert.SerializeObject(portalData);
+
+                    // Send Object Serialized
+                    context.Response.Write(JsonConvert.SerializeObject(portalData));
 
 
-
-
-
-
-
-
-                string jsonString =
-                   "{ "
-               + "\"chatMesseages\": [ "
-               + "{ "
-               + "\"Receiver\": \"Emma Goldman\", "
-               + "\"Sender\": \"Noam Chomsky\", "
-               + "\"Message\": \"Hey girl this is Noam Chomsky\", "
-               + "\"Date\": \"2016-01-20\", "
-               + "\"Time\": \"02:08:56\", "
-               + "\"Id\": \"1\" "
-               + "}, "
-               + "{ "
-               + "\"Receiver\": \"Emma Goldman\", "
-               + "\"Sender\": \"Noam Chomsky\", "
-               + "\"Message\": \"I was wondering if you have that book I lend you\", "
-               + "\"Date\": \"2016-01-20\", "
-               + "\"Time\": \"02:09:56\", "
-               + "\"Id\": \"2\" "
-               + "}, "
-               + "{ "
-               + "\"Receiver\": \"Emma Goldman\", "
-               + "\"Sender\": \"Noam Chomsky\", "
-               + "\"Message\": \"If not its ok\", "
-               + "\"Date\": \"2016-01-20\", "
-               + "\"Time\": \"02:10:56\", "
-               + "\"Id\": \"3\" "
-               + "}, "
-               + "{ "
-               + "\"Receiver\": \"Noam Chomsky\", "
-               + "\"Sender\": \"Emma Goldman\", "
-               + "\"Message\": \"Which one do you need?\" ,"
-               + "\"Date\": \"2016-01-20\", "
-               + "\"Time\": \"02:11:02\", "
-               + "\"Id\": \"4\" "
-               + "}, "
-               + "{ "
-               + "\"Receiver\": \"Emma Goldman\", "
-               + "\"Sender\": \"Noam Chomsky\", "
-               + "\"Message\": \"Intro to Anarchism\", "
-               + "\"Date\": \"2016-01-20\", "
-               + "\"Time\": \"02:11:56\", "
-               + "\"Id\": \"5\" "
-               + "}, "
-               + "{ "
-               + "\"Receiver\": \"Noam Chomsky\", "
-               + "\"Sender\": \"Emma Goldman\", "
-               + "\"Message\": \"I think I have it!\" ,"
-               + "\"Date\": \"2016-01-20\", "
-               + "\"Time\": \"02:12:02\", "
-               + "\"Id\": \"6\" "
-               + "}, "
-               + "{ "
-               + "\"Receiver\": \"Emma Goldman\", "
-               + "\"Sender\": \"Noam Chomsky\", "
-               + "\"Message\": \"Case 1 - Requirements document\", "
-               + "\"Date\": \"2016-01-20\", "
-               + "\"Time\": \"02:12:56\", "
-               + "\"Id\": \"7\" "
-               + "}, "
-               + "{ "
-               + "\"Receiver\": \"Noam Chomsky\", "
-               + "\"Sender\": \"Emma Goldman\", "
-               + "\"Message\": \"Come pick it up\", "
-               + "\"Date\": \"2016-01-20\", "
-               + "\"Time\": \"02:13:56\", "
-               + "\"Id\": \"8\" "
-               + "}, "
-               + "{ "
-               + "\"Receiver\": \"Noam Chomsky\", "
-               + "\"Sender\": \"Emma Goldman\", "
-               + "\"Message\": \"I'll be here all day\" ,"
-               + "\"Date\": \"2016-01-20\", "
-               + "\"Time\": \"02:14:56\", "
-               + "\"Id\": \"9\" "
-               + "}, "
-               + "{ "
-               + "\"Receiver\": \"Emma Goldman\", "
-               + "\"Sender\": \"Noam Chomsky\", "
-               + "\"Message\": \"Great Thanks!\" ,"
-               + "\"Date\": \"2016-01-20\", "
-               + "\"Time\": \"02:15:56\", "
-               + "\"Id\": \"10\" "
-               + "} "
-               + "] "
-               + "}";
-
-                String test = jsonString;
-             
-                context.Response.Write(jsonString);
+                   
             }
             catch (Exception e)
             {
                 e.ToString();
             }
+
+
+
         }
     }
 }

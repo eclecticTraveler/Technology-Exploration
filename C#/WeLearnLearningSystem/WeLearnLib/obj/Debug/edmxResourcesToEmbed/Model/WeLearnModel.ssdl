@@ -21,6 +21,7 @@
     <Property Name="docDate" Type="date" Nullable="false" />
     <Property Name="docTime" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
     <Property Name="docDesc" Type="nvarchar" MaxLength="50" />
+    <Property Name="isDocDeleted" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Session">
     <Key>
@@ -29,6 +30,7 @@
     <Property Name="sessionId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="userId" Type="bigint" Nullable="false" />
     <Property Name="documentId" Type="bigint" Nullable="false" />
+    <Property Name="receiverId" Type="bigint" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -142,8 +144,20 @@
   </Function>
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="spAllUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="username" Type="nvarchar" Mode="In" />
-    <Parameter Name="password" Type="nvarchar" Mode="In" />
+    <Parameter Name="userId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="spDeleteNotPermanentlyUserEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="docUUID" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spInsertUserEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="docUUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="docType" Type="nchar" Mode="In" />
+    <Parameter Name="docCont" Type="nchar" Mode="In" />
+    <Parameter Name="docText" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="docVer" Type="bigint" Mode="In" />
+    <Parameter Name="docDate" Type="date" Mode="In" />
+    <Parameter Name="docDesc" Type="nvarchar" Mode="In" />
+    <Parameter Name="sessionUserId" Type="bigint" Mode="In" />
   </Function>
   <Function Name="spInsertWeLearnUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="firstName" Type="nvarchar" Mode="In" />
@@ -162,9 +176,20 @@
   <Function Name="spRetriveAllCoursesFromUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="userId" Type="bigint" Mode="In" />
   </Function>
+  <Function Name="spRetriveUserChatConversation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userLoggedIn" Type="bigint" Mode="In" />
+    <Parameter Name="userChattingWith" Type="bigint" Mode="In" />
+  </Function>
   <Function Name="spRetriveUserDocuments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="userId" Type="bigint" Mode="In" />
     <Parameter Name="context" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="spUpdateUserEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="docUUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="docText" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="docVer" Type="bigint" Mode="In" />
+    <Parameter Name="docDate" Type="date" Mode="In" />
+    <Parameter Name="docDesc" Type="nvarchar" Mode="In" />
   </Function>
   <EntityContainer Name="WeLearnDBmsModelStoreContainer">
     <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />

@@ -28,6 +28,7 @@ namespace WeLearnLib.Model
         public System.DateTime docDate { get; set; }
         public byte[] docTime { get; set; }
         public string docDesc { get; set; }
+        public string isDocDeleted { get; set; }
     
         public virtual ICollection<Session> Sessions { get; set; }
     }

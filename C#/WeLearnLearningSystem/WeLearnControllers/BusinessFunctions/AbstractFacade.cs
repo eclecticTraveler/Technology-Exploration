@@ -22,60 +22,122 @@ namespace WeLearnControllers.BusinessFunctions
 
     //    protected abstract EntityManager getEntityManager();
 
-        public void create(T entity)
+        public void create(T entity, Decimal userId)
         {
-
-            Object test = entity;
-            //test.Equals(WeLearnLib.Model.User
-            if (test is User)
+            if (userId <= 0)
             {
-                User u = (User)test;
+                return;
+            }
+            Object modelObject = entity;
+            //test.Equals(WeLearnLib.Model.User
+            if (modelObject is Document)
+            {
+                // Cast it to make sure is a Doc
+                Document d = (Document)modelObject;
+                //Create instance for Entities and pass info to procedure to save on database
+                WeLearnDBmsEntities dbEntities = new WeLearnDBmsEntities();
+                try
+                {
+                    dbEntities.fun_InsertUserEvent(d.docUUID, d.docType, d.docContext, d.docText, (long)d.docVersion, d.docDate, d.docDesc, (long)userId);
+                    // GO back to see if we can land on the next line to be exec from the method that called this method, otherwise is going to retun all the way
+                    // Without executing anything else
+                    //return;
+
+                    // Technically if it goes wrong its going to return failure and its going to send the view that status of the failure this logging the person
+                    // out, this is just in the mean time that I make the storce proce return a confirmation of success on the transaction
+                }
+                catch (Exception ex)
+                {
+                    ex.ToString();
+                }
+
+            }
+            else if (modelObject is User)
+            {
+                User u = (User)modelObject;
                 String password = u.password;
                 String lastName = u.lastName;
                 String username = u.username;
 
             }
 
-            String objType = test.ToString();
-            switch (objType)
+        }
+
+        public void edit(T entity, Decimal userId)
+        {
+            if (userId <= 0)
             {
-                case "WeLearnLib.Model.User":
-                        User u = (User)test;
-                        String password = u.password;
-                        String lastName = u.lastName;
-                        String username = u.username;
-                        break;
-                case "WeLearnLib.Model.Document":
-                        break;
-                default:
-                        break;
+                return;
+            }
+            Object modelObject = entity;
+            //test.Equals(WeLearnLib.Model.User
+            if (modelObject is Document)
+            {
+                // Cast it to make sure is a Doc
+                Document d = (Document)modelObject;
+                //Create instance for Entities and pass info to procedure to save on database
+                WeLearnDBmsEntities dbEntities = new WeLearnDBmsEntities();
+                try
+                {
+                    // Update the event
+                    dbEntities.fun_UpdateUserEvent(d.docUUID, d.docText, (long)d.docVersion, d.docDate, d.docDesc);
+                }
+                catch (Exception ex)
+                {
+                    ex.ToString();
+                }
+
+            }
+            else if (modelObject is User)
+            {
+                User u = (User)modelObject;
+                String password = u.password;
+                String lastName = u.lastName;
+                String username = u.username;
+
             }
           
-    
-            //    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-            //Validator validator = factory.getValidator();
-            //Set<ConstraintViolation<T>> constraintViolations = validator.validate(entity);
-            //if(constraintViolations.size() > 0){
-            //    Iterator<ConstraintViolation<T>> iterator = constraintViolations.iterator();
-            //    while(iterator.hasNext()){
-            //        ConstraintViolation<T> cv = iterator.next();
-            //        System.err.println(cv.getRootBeanClass().getName()+"."+cv.getPropertyPath() + " " +cv.getMessage());
-
-            //        System.out.println(cv.getRootBeanClass().getSimpleName()+"."+cv.getPropertyPath() + " " +cv.getMessage());
-            //    }
-            //}else{
-            //    getEntityManager().persist(entity);
-            //}
         }
 
-        public void edit(T entity)
+        public void remove(T entity, Decimal userId)
         {
-            //getEntityManager().merge(entity);
-        }
+            if (userId <= 0)
+            {
+                return;
+            }
+            Object modelObject = entity;
+            //test.Equals(WeLearnLib.Model.User
+            if (modelObject is Document)
+            {
+                // Cast it to make sure is a Doc
+                Document d = (Document)modelObject;
+                //Create instance for Entities and pass info to procedure to save on database
+                WeLearnDBmsEntities dbEntities = new WeLearnDBmsEntities();
+                try
+                {
+                    //dbEntities.fun_InsertUserEvent(d.docUUID, d.docType, d.docContext, d.docText, (long)d.docVersion, d.docDate, d.docDesc, (long)userId);
+                    dbEntities.spDeleteUserEvent(d.docUUID);
+                    // GO back to see if we can land on the next line to be exec from the method that called this method, otherwise is going to retun all the way
+                    // Without executing anything else
+                    //return;
 
-        public void remove(T entity)
-        {
-            //getEntityManager().remove(getEntityManager().merge(entity));
+                    // Technically if it goes wrong its going to return failure and its going to send the view that status of the failure this logging the person
+                    // out, this is just in the mean time that I make the storce proce return a confirmation of success on the transaction
+                }
+                catch (Exception ex)
+                {
+                    ex.ToString();
+                }
+
+            }
+            else if (modelObject is User)
+            {
+                User u = (User)modelObject;
+                String password = u.password;
+                String lastName = u.lastName;
+                String username = u.username;
+
+            }
         }
 
         //public T find(Object id)

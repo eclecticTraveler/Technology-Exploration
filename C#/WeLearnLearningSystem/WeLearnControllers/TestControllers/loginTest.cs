@@ -19,17 +19,7 @@ namespace WeLearnControllers.TestControllers
 
             try
             {
-                User u = new User();
-                u.firstName = "firstCode";
-                u.lastName = "FirstCode";
-                u.email = "f@code.code";
-                u.username = username;
-                u.password = password;
-                u.gender = "M";
-                u.typeOfUser = "Student";
-                u.userPicAddress = "";
 
-                userFac.create(u);
             }
             catch (Exception e)
             {

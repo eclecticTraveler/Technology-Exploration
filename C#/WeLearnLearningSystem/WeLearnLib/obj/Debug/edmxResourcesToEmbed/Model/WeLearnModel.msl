@@ -13,6 +13,7 @@
     <EntitySetMapping Name="Documents">
       <EntityTypeMapping TypeName="WeLearnDBmsModel.Document">
         <MappingFragment StoreEntitySet="Document">
+          <ScalarProperty Name="isDocDeleted" ColumnName="isDocDeleted" />
           <ScalarProperty Name="docId" ColumnName="docId" />
           <ScalarProperty Name="docUUID" ColumnName="docUUID" />
           <ScalarProperty Name="docType" ColumnName="docType" />
@@ -28,6 +29,7 @@
     <EntitySetMapping Name="Sessions">
       <EntityTypeMapping TypeName="WeLearnDBmsModel.Session">
         <MappingFragment StoreEntitySet="Session">
+          <ScalarProperty Name="receiverId" ColumnName="receiverId" />
           <ScalarProperty Name="sessionId" ColumnName="sessionId" />
           <ScalarProperty Name="userId" ColumnName="userId" />
           <ScalarProperty Name="documentId" ColumnName="documentId" />
@@ -217,5 +219,48 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="fun_GetAllChatUsers" FunctionName="WeLearnDBmsModel.Store.spAllUsers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WeLearnDBmsModel.fun_GetAllChatUsers_Result">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="typeOfUser" ColumnName="typeOfUser" />
+          <ScalarProperty Name="userPicAddress" ColumnName="userPicAddress" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spRetriveUserChatConversation" FunctionName="WeLearnDBmsModel.Store.spRetriveUserChatConversation">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WeLearnDBmsModel.spRetriveUserChatConversation_Result">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="documentId" ColumnName="documentId" />
+          <ScalarProperty Name="docText" ColumnName="docText" />
+          <ScalarProperty Name="docDesc" ColumnName="docDesc" />
+          <ScalarProperty Name="docDate" ColumnName="docDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spGetUserChatConversation" FunctionName="WeLearnDBmsModel.Store.spRetriveUserChatConversation">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WeLearnDBmsModel.spGetUserChatConversation_Result">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="documentId" ColumnName="documentId" />
+          <ScalarProperty Name="docText" ColumnName="docText" />
+          <ScalarProperty Name="docDesc" ColumnName="docDesc" />
+          <ScalarProperty Name="docDate" ColumnName="docDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spInsertUserEvent" FunctionName="WeLearnDBmsModel.Store.spInsertUserEvent" />
+    <FunctionImportMapping FunctionImportName="fun_InsertUserEvent" FunctionName="WeLearnDBmsModel.Store.spInsertUserEvent" />
+    <FunctionImportMapping FunctionImportName="spUpdateUserEvent" FunctionName="WeLearnDBmsModel.Store.spUpdateUserEvent" />
+    <FunctionImportMapping FunctionImportName="fun_UpdateUserEvent" FunctionName="WeLearnDBmsModel.Store.spUpdateUserEvent" />
+    <FunctionImportMapping FunctionImportName="spDeleteNotPermanentlyUserEvent" FunctionName="WeLearnDBmsModel.Store.spDeleteNotPermanentlyUserEvent" />
+    <FunctionImportMapping FunctionImportName="spDeleteUserEvent" FunctionName="WeLearnDBmsModel.Store.spDeleteNotPermanentlyUserEvent" />
   </EntityContainerMapping>
 </Mapping>

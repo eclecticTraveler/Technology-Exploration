@@ -8,7 +8,6 @@ C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\Angula
 C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\AngularTestingAndDemo\bin\EntityFramework.dll
 C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\AngularTestingAndDemo\bin\WeLearnLib.pdb
 C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\AngularTestingAndDemo\bin\EntityFramework.xml
-C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\AngularTestingAndDemo\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\AngularTestingAndDemo\bin\System.Web.Helpers.dll
 C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\AngularTestingAndDemo\bin\System.Web.Mvc.dll
 C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\AngularTestingAndDemo\bin\System.Web.Mvc.Extensions.dll
@@ -30,3 +29,10 @@ C:\Users\rome\Documents\Visual Studio 2013\Projects\AngularTestingAndDemo\Angula
 C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\AngularTestingAndDemo\bin\Newtonsoft.Json.dll
 C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\AngularTestingAndDemo\bin\Newtonsoft.Json.pdb
 C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\AngularTestingAndDemo\bin\Newtonsoft.Json.xml
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\AngularTestingAndDemo\bin\DotNetOpenAuth.Core.dll
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\AngularTestingAndDemo\bin\System.Net.Http.Extensions.dll
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\AngularTestingAndDemo\bin\System.Net.Http.Primitives.dll
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\AngularTestingAndDemo\bin\DotNetOpenAuth.Core.xml
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\AngularTestingAndDemo\bin\System.Net.Http.Extensions.xml
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\AngularTestingAndDemo\bin\System.Net.Http.Primitives.xml
+C:\Users\rome\documents\visual studio 2013\Projects\AngularTestingAndDemo\AngularTestingAndDemo\obj\Debug\AngularTestingAndDemo.csproj.App.config

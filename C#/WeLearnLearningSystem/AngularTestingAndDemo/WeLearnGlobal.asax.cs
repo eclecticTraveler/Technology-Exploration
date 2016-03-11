@@ -35,7 +35,9 @@ namespace AngularTestingAndDemo
 
         protected void Application_Error(object sender, EventArgs e)
         {
-
+            Server.ClearError();
+            Response.Redirect("index.html", false);
+            Context.ApplicationInstance.CompleteRequest();
         }
 
         protected void Session_End(object sender, EventArgs e)

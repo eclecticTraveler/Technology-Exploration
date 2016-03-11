@@ -29,6 +29,8 @@
     <link href="Styles/chatStyle.css" rel="stylesheet" />
     <link href="Styles/main.css" rel="stylesheet" />
     <link href="Styles/weLearn.css" rel="stylesheet" />
+    <link href="Styles/addEvent.css" rel="stylesheet" />
+    <link href="Styles/calendar.css" rel="stylesheet" />
     <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Open+Sans'>
 
     <script src="Scripts/main.js"></script>
@@ -36,12 +38,14 @@
     <script src="Scripts/weLearnServices.js"></script>
     <script src="Scripts/WeLearnDirectives.js"></script>
 
-    <!--<script src="js/calendar.js"></script>
-    <script src="js/ui-bootstrap-tpls-0.14.3.js"></script>
-    <script src="js/datePicker.js"></script>
-    <script src="js/timePicker.js"></script>-->
-    <!--        <script src="js/chatModule.js"></script>-->
-    <!--<link rel="stylesheet" href="css/calendar.css">-->
+    <script src="Scripts/ThirdPartyComponents/calendar.js"></script>
+    <script src="Scripts/ThirdPartyComponents/ui-bootstrap-tpls-0.14.3.js"></script>
+    <script src="Scripts/ThirdPartyComponents/timePicker.js"></script>
+    <script src="Scripts/ThirdPartyComponents/datePicker.js"></script>
+    <script src="Scripts/ThirdPartyComponents/calendar.js"></script>
+
+    <!--For reroute injection without the #  to the home page-->
+    <base href="/">
 
 </head>
 <body ng-controller="indexController">
@@ -70,7 +74,7 @@
                        
                         
                      **********************************************************************-->
-                    <a class="navbar-brand mainLogo" href="#/" ng-click="backToMain()">{{upperBarItems.webTitle}}</a>
+                    <a class="navbar-brand mainLogo" href="/" style="margin-top: 6px;" ng-click="backToMain()">{{upperBarItems.webTitle}}</a>
                     <div id="menuHamburger" class="navbar-header">
                         <button id="menuButton" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar" ng-show="showHambuguerButton">
                             <span class="sr-only">Menu navigation</span>
@@ -114,15 +118,17 @@
                         <!-- Big resolution map-->
                         <ul id="bigMenu" class="nav navbar-right top-nav navigationSet" ng-show="showBigResolMenuNav">
                             <li class="dropdown">
-                                <a class="dropdown-toggle menuItems" data-toggle="dropdown"><i class="glyphicon glyphicon-envelope"></i> <b class="caret"></b></a>
+                                <a class="dropdown-toggle menuItems" data-toggle="dropdown" style="margin-top: 6px;"><i class="glyphicon glyphicon-envelope"></i> <b class="caret"></b></a>
                                 <ul class="dropdown-menu message-dropdown"></ul>
                             </li>
                             <li class="dropdown">
-                                <a class="dropdown-toggle  menuItems" data-toggle="dropdown"><i class="glyphicon glyphicon-bell"></i> <b class="caret"></b></a>
+                                <a class="dropdown-toggle  menuItems" data-toggle="dropdown" style="margin-top: 6px;"><i class="glyphicon glyphicon-bell"></i> <b class="caret"></b></a>
                                 <ul class="dropdown-menu alert-dropdown"></ul>
                             </li>
                             <li class="dropdown">
-                                <a class="dropdown-toggle  menuItems" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>{{" " + userFullName}}<b class="caret"></b></a>
+                                <a class="dropdown-toggle  menuItems" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>{{" " + userFullName}}<b class="caret"></b>
+                                    <img alt="User" class="contactphoto setPicSize" ng-src="{{userPic}}" />
+                                </a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a><i class="glyphicon glyphicon-user"></i> {{upperBarItems.profile}}</a>
@@ -158,5 +164,9 @@
         </div>
     </div>
 
+
+    <div id="loadingEvent">
+        <img ng-src="Pics/app_ajax_loader.gif" class="ajax-loader" />
+    </div> 
 </body>
 </html>

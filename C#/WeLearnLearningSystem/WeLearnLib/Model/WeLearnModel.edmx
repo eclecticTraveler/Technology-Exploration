@@ -26,6 +26,7 @@
           <Property Name="docDate" Type="date" Nullable="false" />
           <Property Name="docTime" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
           <Property Name="docDesc" Type="nvarchar" MaxLength="50" />
+          <Property Name="isDocDeleted" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Session">
           <Key>
@@ -34,6 +35,7 @@
           <Property Name="sessionId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="userId" Type="bigint" Nullable="false" />
           <Property Name="documentId" Type="bigint" Nullable="false" />
+          <Property Name="receiverId" Type="bigint" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -147,8 +149,20 @@
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spAllUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="username" Type="nvarchar" Mode="In" />
-          <Parameter Name="password" Type="nvarchar" Mode="In" />
+          <Parameter Name="userId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="spDeleteNotPermanentlyUserEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="docUUID" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="spInsertUserEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="docUUID" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="docType" Type="nchar" Mode="In" />
+          <Parameter Name="docCont" Type="nchar" Mode="In" />
+          <Parameter Name="docText" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="docVer" Type="bigint" Mode="In" />
+          <Parameter Name="docDate" Type="date" Mode="In" />
+          <Parameter Name="docDesc" Type="nvarchar" Mode="In" />
+          <Parameter Name="sessionUserId" Type="bigint" Mode="In" />
         </Function>
         <Function Name="spInsertWeLearnUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="firstName" Type="nvarchar" Mode="In" />
@@ -167,9 +181,20 @@
         <Function Name="spRetriveAllCoursesFromUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userId" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="spRetriveUserChatConversation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userLoggedIn" Type="bigint" Mode="In" />
+          <Parameter Name="userChattingWith" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="spRetriveUserDocuments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userId" Type="bigint" Mode="In" />
           <Parameter Name="context" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spUpdateUserEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="docUUID" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="docText" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="docVer" Type="bigint" Mode="In" />
+          <Parameter Name="docDate" Type="date" Mode="In" />
+          <Parameter Name="docDesc" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="WeLearnDBmsModelStoreContainer">
           <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
@@ -222,6 +247,7 @@
           <Property Name="docTime" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="docDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Sessions" Relationship="Self.FK_Session_Document" FromRole="Document" ToRole="Session" />
+          <Property Name="isDocDeleted" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Session">
           <Key>
@@ -232,6 +258,7 @@
           <Property Name="documentId" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Document" Relationship="Self.FK_Session_Document" FromRole="Session" ToRole="Document" />
           <NavigationProperty Name="User" Relationship="Self.FK_Session_User" FromRole="Session" ToRole="User" />
+          <Property Name="receiverId" Type="Int64" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -371,8 +398,7 @@
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="spAllUsers" ReturnType="Collection(WeLearnDBmsModel.spAllUsers_Result)">
-            <Parameter Name="username" Mode="In" Type="String" />
-            <Parameter Name="password" Mode="In" Type="String" />
+          <Parameter Name="userId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="spInsertWeLearnUser" ReturnType="Collection(Int64)">
             <Parameter Name="firstName" Mode="In" Type="String" />
@@ -389,29 +415,79 @@
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="func_GetAllUsers" ReturnType="Collection(WeLearnDBmsModel.func_GetAllUsers_Result)">
-            <Parameter Name="username" Mode="In" Type="String" />
-            <Parameter Name="password" Mode="In" Type="String" />
+          <Parameter Name="userId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="fun_IsUserInSystem" ReturnType="Collection(WeLearnDBmsModel.fun_IsUserInSystem_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spRetriveAllCoursesFromUser" ReturnType="Collection(WeLearnDBmsModel.spRetriveAllCoursesFromUser_Result)">
-            <Parameter Name="userId" Mode="In" Type="Int64" />
+          <Parameter Name="userId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="spRetriveUserDocuments" ReturnType="Collection(WeLearnDBmsModel.spRetriveUserDocuments_Result)">
             <Parameter Name="userId" Mode="In" Type="Int64" />
             <Parameter Name="context" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fun_GetOrRetriveAllCoursesFromUser" ReturnType="Collection(WeLearnDBmsModel.fun_GetOrRetriveAllCoursesFromUser_Result)">
-            <Parameter Name="userId" Mode="In" Type="Int64" />
+          <Parameter Name="userId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="fun_GetOrRetriveUserDocuments" ReturnType="Collection(WeLearnDBmsModel.fun_GetOrRetriveUserDocuments_Result)">
             <Parameter Name="userId" Mode="In" Type="Int64" />
             <Parameter Name="context" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fun_GetUserCourses" ReturnType="Collection(WeLearnDBmsModel.fun_GetUserCourses_Result)">
-            <Parameter Name="userId" Mode="In" Type="Int64" />
+          <Parameter Name="userId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="fun_GetAllChatUsers" ReturnType="Collection(WeLearnDBmsModel.fun_GetAllChatUsers_Result)">
+          <Parameter Name="userId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="spRetriveUserChatConversation" ReturnType="Collection(WeLearnDBmsModel.spRetriveUserChatConversation_Result)">
+            <Parameter Name="userLoggedIn" Mode="In" Type="Int64" />
+            <Parameter Name="userChattingWith" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="spGetUserChatConversation" ReturnType="Collection(WeLearnDBmsModel.spGetUserChatConversation_Result)">
+            <Parameter Name="userLoggedIn" Mode="In" Type="Int64" />
+            <Parameter Name="userChattingWith" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertUserEvent">
+            <Parameter Name="docUUID" Mode="In" Type="String" />
+            <Parameter Name="docType" Mode="In" Type="String" />
+            <Parameter Name="docCont" Mode="In" Type="String" />
+            <Parameter Name="docText" Mode="In" Type="String" />
+            <Parameter Name="docVer" Mode="In" Type="Int64" />
+            <Parameter Name="docDate" Mode="In" Type="DateTime" />
+            <Parameter Name="docDesc" Mode="In" Type="String" />
+            <Parameter Name="sessionUserId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="fun_InsertUserEvent">
+            <Parameter Name="docUUID" Mode="In" Type="String" />
+            <Parameter Name="docType" Mode="In" Type="String" />
+            <Parameter Name="docCont" Mode="In" Type="String" />
+            <Parameter Name="docText" Mode="In" Type="String" />
+            <Parameter Name="docVer" Mode="In" Type="Int64" />
+            <Parameter Name="docDate" Mode="In" Type="DateTime" />
+            <Parameter Name="docDesc" Mode="In" Type="String" />
+            <Parameter Name="sessionUserId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdateUserEvent">
+            <Parameter Name="docUUID" Mode="In" Type="String" />
+            <Parameter Name="docText" Mode="In" Type="String" />
+            <Parameter Name="docVer" Mode="In" Type="Int64" />
+            <Parameter Name="docDate" Mode="In" Type="DateTime" />
+            <Parameter Name="docDesc" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="fun_UpdateUserEvent">
+            <Parameter Name="docUUID" Mode="In" Type="String" />
+            <Parameter Name="docText" Mode="In" Type="String" />
+            <Parameter Name="docVer" Mode="In" Type="Int64" />
+            <Parameter Name="docDate" Mode="In" Type="DateTime" />
+            <Parameter Name="docDesc" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spDeleteNotPermanentlyUserEvent">
+            <Parameter Name="docUUID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spDeleteUserEvent">
+            <Parameter Name="docUUID" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -512,6 +588,31 @@
           <Property Type="String" Name="courseName" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="courseCode" Nullable="false" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="fun_GetAllChatUsers_Result">
+          <Property Type="Int64" Name="userId" Nullable="false" />
+          <Property Type="String" Name="firstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="lastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="password" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="gender" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="typeOfUser" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="userPicAddress" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spRetriveUserChatConversation_Result">
+          <Property Type="Int64" Name="userId" Nullable="false" />
+          <Property Type="Int64" Name="documentId" Nullable="false" />
+          <Property Type="String" Name="docText" Nullable="false" />
+          <Property Type="String" Name="docDesc" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="docDate" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spGetUserChatConversation_Result">
+          <Property Type="Int64" Name="userId" Nullable="false" />
+          <Property Type="Int64" Name="documentId" Nullable="false" />
+          <Property Type="String" Name="docText" Nullable="false" />
+          <Property Type="String" Name="docDesc" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="docDate" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -530,6 +631,7 @@
           <EntitySetMapping Name="Documents">
             <EntityTypeMapping TypeName="WeLearnDBmsModel.Document">
               <MappingFragment StoreEntitySet="Document">
+                <ScalarProperty Name="isDocDeleted" ColumnName="isDocDeleted" />
                 <ScalarProperty Name="docId" ColumnName="docId" />
                 <ScalarProperty Name="docUUID" ColumnName="docUUID" />
                 <ScalarProperty Name="docType" ColumnName="docType" />
@@ -545,6 +647,7 @@
           <EntitySetMapping Name="Sessions">
             <EntityTypeMapping TypeName="WeLearnDBmsModel.Session">
               <MappingFragment StoreEntitySet="Session">
+                <ScalarProperty Name="receiverId" ColumnName="receiverId" />
                 <ScalarProperty Name="sessionId" ColumnName="sessionId" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="documentId" ColumnName="documentId" />
@@ -734,6 +837,49 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="fun_GetAllChatUsers" FunctionName="WeLearnDBmsModel.Store.spAllUsers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WeLearnDBmsModel.fun_GetAllChatUsers_Result">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="typeOfUser" ColumnName="typeOfUser" />
+                <ScalarProperty Name="userPicAddress" ColumnName="userPicAddress" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spRetriveUserChatConversation" FunctionName="WeLearnDBmsModel.Store.spRetriveUserChatConversation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WeLearnDBmsModel.spRetriveUserChatConversation_Result">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="documentId" ColumnName="documentId" />
+                <ScalarProperty Name="docText" ColumnName="docText" />
+                <ScalarProperty Name="docDesc" ColumnName="docDesc" />
+                <ScalarProperty Name="docDate" ColumnName="docDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetUserChatConversation" FunctionName="WeLearnDBmsModel.Store.spRetriveUserChatConversation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WeLearnDBmsModel.spGetUserChatConversation_Result">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="documentId" ColumnName="documentId" />
+                <ScalarProperty Name="docText" ColumnName="docText" />
+                <ScalarProperty Name="docDesc" ColumnName="docDesc" />
+                <ScalarProperty Name="docDate" ColumnName="docDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spInsertUserEvent" FunctionName="WeLearnDBmsModel.Store.spInsertUserEvent" />
+          <FunctionImportMapping FunctionImportName="fun_InsertUserEvent" FunctionName="WeLearnDBmsModel.Store.spInsertUserEvent" />
+          <FunctionImportMapping FunctionImportName="spUpdateUserEvent" FunctionName="WeLearnDBmsModel.Store.spUpdateUserEvent" />
+          <FunctionImportMapping FunctionImportName="fun_UpdateUserEvent" FunctionName="WeLearnDBmsModel.Store.spUpdateUserEvent" />
+          <FunctionImportMapping FunctionImportName="spDeleteNotPermanentlyUserEvent" FunctionName="WeLearnDBmsModel.Store.spDeleteNotPermanentlyUserEvent" />
+          <FunctionImportMapping FunctionImportName="spDeleteUserEvent" FunctionName="WeLearnDBmsModel.Store.spDeleteNotPermanentlyUserEvent" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
