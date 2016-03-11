@@ -1,0 +1,150 @@
+﻿<div id="eventWrapper" class="col-lg-9 col-centered">
+    <h2>{{pageSubtitle}}</h2>
+    <!-- BEGIN FORM-->
+
+    <div class="">
+
+        <form autocomplete="off">
+
+            <!--/*****************************************************
+                        REQUIRED FIELDS
+                **********************************************************/-->
+            <!-- Gray area for asterix-->
+            <div class="well well-sm">
+                <span class="glyphicon-asterisk asteriskTemp"></span>
+                Required Field
+            </div>
+
+            <!--***************************************************
+            * TITLE OF EVENT (REQUIRED)
+            **************************************************-->
+            <div class="form-group">
+                <!-- Title-->
+                <label for="InputTitleOfEvent">Event Title</label>
+                <div class="input-group">
+                    <!-- Gray area for asterix-->
+                    <span class="input-group-addon">
+                        <span class="glyphicon-asterisk asteriskTemp"></span>
+
+                    </span>
+                    <!-- Control-->
+                    <input type="text"
+                           class="form-control"
+                           name="TitleOfEvents"
+                           id="InputEventTitle"
+                           placeholder="Enter Event Title"
+                           ng-model="newEvent.Title"
+                           value=""
+                           required>
+                </div>
+            </div>
+
+
+            <!--***************************************************
+            * DUE DATE (REQUIRED)
+            **************************************************-->
+            <div class="form-group">
+                <!-- Title-->
+                <label for="dueDate">Due Date &amp; Time</label>
+                <div class="row">
+                    <div class="input-group">
+
+                        <!-- Control For DATE-->
+                        <div ng-controller="Datepicker" class="col-md-6  datePicker">
+                            <div class="input-group">
+                                <!-- Gray area for asterix-->
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-asterisk asteriskTemp">
+                                    </span>
+                                </span>
+                                <input id="dueDate" type="text" class="form-control dateFormat" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- Control For TIME-->
+                        <div ng-controller="TimePicker" class="col-md-6  timePicker">
+                            <uib-timepicker class="pull-right" ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>About the Reminder</h3>
+            <!--***************************************************
+            * LEVEL OF IMPORTANCE (REQUIRED)
+            **************************************************-->
+            <div class="form-group">
+                <!-- Title-->
+                <label for="genderCont">Importance Of Event</label>
+                <div class="input-group">
+                    <!-- Gray area for asterix-->
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-asterisk asteriskTemp">
+                        </span>
+                    </span>
+
+                    <!-- Control -->
+                    <div id="eventImportance">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" ng-model="newEvent.levelOfImportance" name="Importance" value="Critical" required>Critical
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" ng-model="newEvent.levelOfImportance" name="Importance" value="Very Important" required>Very Important
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" ng-model="newEvent.levelOfImportance" name="Importance" value="Trivial" required>Trivial
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--***************************************************
+            * DESCRIPTION
+            **************************************************-->
+
+            <div class="form-group">
+
+                <label for="InputMessage">Enter Description of Event</label>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span class="glyphicon-asterisk asteriskTemp"></span>
+                    </span>
+                    <textarea name="Message" id="InputMessage" class="form-control" rows="5" ng-model="newEvent.Description" required></textarea>
+
+                </div>
+            </div>
+
+            <!--***************************************************
+            * BUTTON S CANCEL & SEND FEATURES (REQUIRED)
+            **************************************************-->
+            <div>
+                <!-- BUTTON SUBMIT -->
+                <input type="submit"
+                       name="submit"
+                       id="submit"
+                       value="{{buttonTitle}}"
+                       class="btn btn-primary btn-lg pull-right buttonForm"
+                       ng-click="addOrUpdateEvent(newEvent)" />
+
+                <!-- BUTTON CANCEL -->
+                <input type="button"
+                       name="cancel"
+                       id="cancel"
+                       value="Cancel"
+                       class="btn btn-danger btn-lg cancelButton"
+                       ng-click="cancelEvent()" />
+
+            </div>
+
+        </form>
+    </div>
+    <!-- END FORM-->
+</div>
